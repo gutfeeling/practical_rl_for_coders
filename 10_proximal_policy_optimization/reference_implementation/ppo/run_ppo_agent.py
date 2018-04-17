@@ -1,4 +1,7 @@
+import datetime
+import json
 from math import log, sqrt
+from pathlib import Path
 
 import argparse
 import gym
@@ -104,13 +107,58 @@ parser.add_argument("--total_observations", type = int, default = 5e6)
 
 # We test the agent after this many observations. We test the agent on
 # 100 episodes and report the average score per episode.
-parser.add_argument("--test_interval", type = float, default = 5e4)
+parser.add_argument("--test_interval", type = int, default = 5e4)
+
+# Number of episodes to test the agent in every testing round
+parser.add_argument("--total_number_of_testing_episodes", type = int, default = 100)
 
 # End training related parameters
+
+
+# Start logging related parameters
+
+# The directory where the agent should store training logs.
+parser.add_argument("--log_directory_path", default = "./training_logs")
+
+# End logging related parameters
 
 args = parser.parse_args()
 
 if __name__ == "__main__":
+
+    # Create the necessary directories for logging the training process.
+    # Here is the directory structure
+    # training_logs
+    #     - BipedalWalker-v2
+    #         - 2018-04-17_16:36:36
+    #             - Logs go here....
+    #             - parameters.json
+    #             - gym_training_logs
+    #             - gym_testing_logs
+    #             - ...
+    log_directory_path = Path(args.log_directory_path)
+
+    if not log_directory_path.exists():
+        log_directory_path.mkdir()
+
+    env_directory_path = log_directory_path / args.env
+
+    if not env_directory_path.exists():
+        env_directory_path.mkdir()
+
+    timestamp_string = datetime.datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
+    timestamp_directory_path = env_directory_path / timestamp_string
+
+    if not timestamp_directory_path.exists():
+        timestamp_directory_path.mkdir()
+
+    gym_training_logs_directory_path = str(
+        timestamp_directory_path / "gym_training_logs"
+        )
+
+    gym_testing_logs_directory_path = str(
+        timestamp_directory_path / "gym_testing_logs"
+        )
 
     # Get the learning env. Wrap the vanilla env with the appropriate wrapper
     # or leave it unmodified depending on the learning_env_wrapper
@@ -147,6 +195,17 @@ if __name__ == "__main__":
 
     agent = PPOAgent()
 
+    # Before starting training, create a file containing the parameters for
+    # this run. Useful for future reference.
+
+    parameters_file_path = timestamp_directory_path / "parameters.json"
+
+    with parameters_file_path.open("w") as parameters_fh:
+        # Get a dictionary of parameters including hyperparameters,
+        # training related parameters and logging related parameters
+        parameters = vars(args)
+        json.dump(parameters, parameters_fh)
+
     # Train the agent. Progress will be printed on the command line.
     agent.train(
         actor = actor,
@@ -159,5 +218,8 @@ if __name__ == "__main__":
         minibatch_size = args.minibatch_size,
         epochs = args.epochs,
         total_observations = args.total_observations,
-        test_interval = args.test_interval
+        test_interval = args.test_interval,
+        total_number_of_testing_episodes = args.total_number_of_testing_episodes,
+        gym_training_logs_directory_path = gym_training_logs_directory_path,
+        gym_testing_logs_directory_path = gym_testing_logs_directory_path
         )

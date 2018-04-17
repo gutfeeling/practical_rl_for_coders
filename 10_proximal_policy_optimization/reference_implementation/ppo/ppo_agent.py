@@ -1,6 +1,7 @@
 import datetime
 import random
 
+from gym.wrappers import Monitor
 import numpy as np
 
 class PPOAgent(object):
@@ -133,7 +134,8 @@ class PPOAgent(object):
                     )
                 critic.update_weights(observations, critic_targets)
 
-    def test(self, testing_env, total_number_of_episodes, actor, render):
+    def test(self, testing_env, total_number_of_episodes, actor, render,
+             gym_testing_logs_directory_path = None):
         """Test the PPO agent for a number of episodes and return the average
         reward per episode
 
@@ -185,7 +187,14 @@ class PPOAgent(object):
                 if done:
                     break
 
-            testing_env.close()
+        testing_env.close()
+
+        # Sometimes, we may want to wrap the testing env with a Monitor.
+        # This is useful for automatic video capturing etc.
+        # But there's a bug in the Gym Monitor. The Monitor's close method does
+        # not close the wrapped environment. So we have to do it manually
+        if isinstance(testing_env, Monitor):
+            testing_env.env.close()
 
         # Compute average reward per episode
         average_reward = total_rewards/float(total_number_of_episodes)
@@ -193,7 +202,8 @@ class PPOAgent(object):
 
     def train(self, actor, critic, discount_factor, lambda_value, learning_env,
               testing_env, horizon, minibatch_size, epochs, total_observations,
-              test_interval
+              test_interval, total_number_of_testing_episodes,
+              gym_training_logs_directory_path, gym_testing_logs_directory_path
               ):
         """Train the PPO agent
 
@@ -215,6 +225,14 @@ class PPOAgent(object):
         epochs -- Number of epochs of training on one set of experiences
         total_observations -- Train till this observation number
         test_interval -- Test after this many observations
+        total_number_of_testing_episodes -- Number of episodes to test the agent
+                                            in every testing round
+        gym_training_logs_directory_path - Directory to save automatic Gym logs
+                                           related to training. We save the
+                                           rewards for every learning episode.
+        gym_testing_logs_directory_path - Directory to save automatic Gym logs
+                                          related to testing. We save a video
+                                          for the first test episode.
         """
 
         # We will fill training_samples with the agent's experience till it
@@ -236,6 +254,18 @@ class PPOAgent(object):
 
         # Keep count of the episode number
         episode_number = 1
+
+        # The learning env should always be wrapped by the Monitor provided
+        # by Gym. This lets us automatically save the rewards for every episode
+
+        learning_env = Monitor(
+            learning_env, gym_training_logs_directory_path,
+            # Don't want video recording during training, only during testing
+            video_callable = False,
+            # Write after every reset so that we don't lose data for
+            # prematurely interrupted training runs
+            write_upon_reset = True,
+            )
 
         while observation_number < total_observations:
 
@@ -293,8 +323,29 @@ class PPOAgent(object):
                 observation_number += 1
                 # Test the current performance after every test_interval
                 if observation_number % test_interval == 0:
+                    # The testing env is also wrapped by a Monitor so that we
+                    # can take automatic videos during testing. Each testing
+                    # round executes 100 episodes. We will take a video for the
+                    # very first testing episode
+
+                    video_callable = lambda count : count == 0
+
+                    # Since the environment is closed after every testing round,
+                    # the video for different testing round will end up having
+                    # the same name! To differentiate the videos, we pass
+                    # an unique uid parameter
+
+                    monitored_testing_env = Monitor(
+                        testing_env, gym_testing_logs_directory_path,
+                        video_callable = video_callable,
+                        resume = True,
+                        uid = observation_number / test_interval
+                        )
+
+                    # Run the test
                     average_reward = self.test(
-                        testing_env, total_number_of_episodes = 100,
+                        monitored_testing_env,
+                        total_number_of_episodes = total_number_of_testing_episodes,
                         actor = actor, render = False
                         )
                     print(
@@ -360,7 +411,6 @@ class PPOAgent(object):
                     episode_number += 1
                     break
 
-            learning_env.close()
             print(
                 "[{0}] Episode number : {1}, Obervation number: {2}, "
                 "Reward in this episode : {3}".format(
@@ -368,3 +418,8 @@ class PPOAgent(object):
                     observation_number, total_rewards_obtained_in_this_episode
                     )
                 )
+        learning_env.close()
+
+        # There's a bug in the Gym Monitor. The Monitor's close method does not
+        # close the wrapped environment. So we have to do it manually.
+        learning_env.env.close()
