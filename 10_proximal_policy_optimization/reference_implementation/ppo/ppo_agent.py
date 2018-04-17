@@ -256,7 +256,7 @@ class PPOAgent(object):
         episode_number = 1
 
         # The learning env should always be wrapped by the Monitor provided
-        # by Gym. This lets us automatically save the rewards for every episode
+        # by Gym. This lets us automatically save the rewards for every episode.
 
         learning_env = Monitor(
             learning_env, gym_training_logs_directory_path,
@@ -324,16 +324,15 @@ class PPOAgent(object):
                 # Test the current performance after every test_interval
                 if observation_number % test_interval == 0:
                     # The testing env is also wrapped by a Monitor so that we
-                    # can take automatic videos during testing. Each testing
-                    # round executes 100 episodes. We will take a video for the
-                    # very first testing episode
+                    # can take automatic videos during testing. We will take a
+                    # video for the very first testing episode.
 
                     video_callable = lambda count : count == 0
 
                     # Since the environment is closed after every testing round,
                     # the video for different testing round will end up having
                     # the same name! To differentiate the videos, we pass
-                    # an unique uid parameter
+                    # an unique uid parameter.
 
                     monitored_testing_env = Monitor(
                         testing_env, gym_testing_logs_directory_path,
