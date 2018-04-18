@@ -12,9 +12,8 @@ from ppo.ppo_agent import PPOAgent
 
 parser = argparse.ArgumentParser()
 
-### This section deals with hyperparameters.
-### Can be supplied as command line arguments to this script.
-
+## This section deals with hyperparameters.
+## Can be supplied as command line arguments to this script.
 ## The default values are the default hyperparameters for the reference
 ## implementation. They have been tested and known to work well. These
 ## default values have not been (and should not be) overriden in any other file
@@ -99,6 +98,7 @@ parser.add_argument("--epochs", type = int, default = 10)
 
 # End hyperparameters
 
+### This section deals with training related parameters
 
 # Start training related parameters
 
@@ -114,11 +114,18 @@ parser.add_argument("--total_number_of_testing_episodes", type = int, default = 
 
 # End training related parameters
 
+## This section deals with logging related parameters
 
 # Start logging related parameters
 
 # The directory where the agent should store training logs.
 parser.add_argument("--log_directory_path", default = "./training_logs")
+
+# After how many training epochs should we save the actor model
+parser.add_argument("--actor_model_saving_interval", type = int, default = 200)
+
+# After how many training epochs should we save the critic model
+parser.add_argument("--critic_model_saving_interval", type = int, default = 200)
 
 # End logging related parameters
 
@@ -126,16 +133,18 @@ args = parser.parse_args()
 
 if __name__ == "__main__":
 
-    # Create the necessary directories for logging the training process.
-    # Here is the directory structure
-    # training_logs
-    #     - BipedalWalker-v2
-    #         - 2018-04-17_16:36:36
-    #             - Logs go here....
-    #             - parameters.json
-    #             - gym_training_logs
-    #             - gym_testing_logs
-    #             - ...
+    ## Create the necessary directories for logging the training process.
+    ## Here is the directory structure
+    ## training_logs    # log_directory_path
+    ##     - BipedalWalker-v2    # env_directory_path
+    ##         - 2018-04-17_16:36:36    # timestamp_directory_path
+    ##             - Logs go here....
+    ##             - parameters.json    # parameter_file_path
+    ##             - gym_training_logs    # gym_training_logs_directory_path
+    ##             - gym_testing_logs    # gym_testing_logs_directory_path
+    ##             - keras_training_logs    # keras_training_logs_directory_path
+    ##             - actor_model.h5    # actor_model_saving_path
+    ##             - critic_model.h5   # critic_model_saving_path
     log_directory_path = Path(args.log_directory_path)
 
     if not log_directory_path.exists():
@@ -146,19 +155,44 @@ if __name__ == "__main__":
     if not env_directory_path.exists():
         env_directory_path.mkdir()
 
+    # All data for this training run will be stored under a directory that is named
+    # after the start time of the training run
     timestamp_string = datetime.datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
     timestamp_directory_path = env_directory_path / timestamp_string
 
-    if not timestamp_directory_path.exists():
-        timestamp_directory_path.mkdir()
+    timestamp_directory_path.mkdir()
 
-    gym_training_logs_directory_path = str(
-        timestamp_directory_path / "gym_training_logs"
-        )
+    # Directories for storing automatic gym logs for training and testing
+    # This includes rewards per training episode and videos of test episodes.
+    gym_training_logs_directory_path = timestamp_directory_path / "gym_training_logs"
 
-    gym_testing_logs_directory_path = str(
-        timestamp_directory_path / "gym_testing_logs"
-        )
+    gym_testing_logs_directory_path = timestamp_directory_path / "gym_testing_logs"
+
+    # Directory for storing the loss of the actor and the critic
+    keras_training_logs_directory_path = timestamp_directory_path / "keras_training_logs"
+
+    keras_training_logs_directory_path.mkdir()
+    actor_training_logs_file_path = keras_training_logs_directory_path / "actor_logs.csv"
+    critic_training_logs_file_path = keras_training_logs_directory_path / "critic_logs.csv"
+
+    # Filepath for storing the actor and critic models after interval specified by
+    # actor_model_saving_interval and critic_model_saving_interval
+    actor_model_saving_path = timestamp_directory_path / "actor_model.h5"
+    critic_model_saving_path = timestamp_directory_path / "critic_model.h5"
+
+    # Filepath for storing all parameters for this run
+    parameters_file_path = timestamp_directory_path / "parameters.json"
+
+    ## Pre training tasks
+
+    # Save parameters before starting training. Useful for future reference and for
+    # reproduction of results.
+
+    with parameters_file_path.open("w") as parameters_fh:
+        # Get a dictionary of parameters including hyperparameters,
+        # training related parameters and logging related parameters
+        parameters = vars(args)
+        json.dump(parameters, parameters_fh)
 
     # Get the learning env. Wrap the vanilla env with the appropriate wrapper
     # or leave it unmodified depending on the learning_env_wrapper
@@ -182,31 +216,29 @@ if __name__ == "__main__":
     else:
         testing_env = gym.make(args.env)
 
-    # You are always welcome to define and use your own actors, instead
+    # Get the actor. The actor is a pluggable component of this algorithm, so you are always
+    # welcome to define and use your own actors, instead
     # of using the default one. The default one is just supplied for
     # reference. To use your own actor, define it in models.py
     # and import and use it here.
     actor = DefaultActor(env = learning_env, var = args.var, lr = args.lr_actor,
-                         loss_clipping_epsilon = args.loss_clipping_epsilon
+                         loss_clipping_epsilon = args.loss_clipping_epsilon,
+                         training_logs_file_path= str(actor_training_logs_file_path),
+                         model_saving_path = str(actor_model_saving_path),
+                         model_saving_interval = args.actor_model_saving_interval
                          )
 
-    # You are welcome to use your own critic too.
-    critic = DefaultCritic(env = learning_env, lr = args.lr_critic)
+    # Get the critic. The critic is a pluggable component of this algorithm, so you are
+    # welcome to use your own critic too.
+    critic = DefaultCritic(env = learning_env, lr = args.lr_critic,
+                           training_logs_file_path= str(critic_training_logs_file_path),
+                           model_saving_path = str(critic_model_saving_path),
+                           model_saving_interval = args.critic_model_saving_interval
+                           )
 
     agent = PPOAgent()
 
-    # Before starting training, create a file containing the parameters for
-    # this run. Useful for future reference.
-
-    parameters_file_path = timestamp_directory_path / "parameters.json"
-
-    with parameters_file_path.open("w") as parameters_fh:
-        # Get a dictionary of parameters including hyperparameters,
-        # training related parameters and logging related parameters
-        parameters = vars(args)
-        json.dump(parameters, parameters_fh)
-
-    # Train the agent. Progress will be printed on the command line.
+    ## Train the agent. Progress will be printed on the command line.
     agent.train(
         actor = actor,
         critic = critic,
@@ -220,6 +252,6 @@ if __name__ == "__main__":
         total_observations = args.total_observations,
         test_interval = args.test_interval,
         total_number_of_testing_episodes = args.total_number_of_testing_episodes,
-        gym_training_logs_directory_path = gym_training_logs_directory_path,
-        gym_testing_logs_directory_path = gym_testing_logs_directory_path
+        gym_training_logs_directory_path = str(gym_training_logs_directory_path),
+        gym_testing_logs_directory_path = str(gym_testing_logs_directory_path)
         )

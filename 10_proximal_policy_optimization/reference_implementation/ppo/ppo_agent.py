@@ -88,51 +88,38 @@ class PPOAgent(object):
         epochs -- Number of epochs of training on one set of experiences
         """
 
-        for epoch_number in range(epochs):
-            # Randomize the order of data every epoch
-            random.shuffle(training_samples)
+        observations = np.array([
+            experience["observation"]
+            for experience in training_samples
+            ])
 
-            # Compute the number of minibatches required to exhaust all
-            # experiences
-            total_number_of_minibatches = len(training_samples)//minibatch_size
+        advantages = np.array([
+            [experience["advantage"],]
+            for experience in training_samples
+            ])
 
-            # Train on minibatch
-            for minibatch_number in range(total_number_of_minibatches):
+        actions = np.array([
+            experience["action"]
+            for experience in training_samples
+            ])
 
-                minibatch = training_samples[
-                    minibatch_size*minibatch_number :
-                    minibatch_size*(minibatch_number + 1)
-                    ]
+        actor_targets = np.array([
+            experience["means"]
+            for experience in training_samples
+            ])
 
-                observations = np.array([
-                    experience["observation"]
-                    for experience in minibatch
-                    ])
+        critic_targets = np.array([
+            experience["value_target"]
+            for experience in training_samples
+            ])
 
-                advantages = np.array([
-                    [experience["advantage"],]
-                    for experience in minibatch
-                    ])
-
-                actions = np.array([
-                    experience["action"]
-                    for experience in minibatch
-                    ])
-
-                actor_targets = np.array([
-                    experience["means"]
-                    for experience in minibatch
-                    ])
-
-                critic_targets = np.array([
-                    experience["value_target"]
-                    for experience in minibatch
-                    ])
-
-                actor.update_weights(
-                    observations, actor_targets, advantages, actions
-                    )
-                critic.update_weights(observations, critic_targets)
+        actor.update_weights(
+            observations, actor_targets, advantages, actions, minibatch_size,
+            epochs
+            )
+        critic.update_weights(
+            observations, critic_targets, minibatch_size, epochs
+            )
 
     def test(self, testing_env, total_number_of_episodes, actor, render,
              gym_testing_logs_directory_path = None):

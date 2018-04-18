@@ -1,6 +1,7 @@
 from math import pi, sqrt
 
 from keras import backend as K
+from keras.callbacks import CSVLogger, ModelCheckpoint
 from keras.layers import Dense
 from keras.models import Input, Model, Sequential
 from keras.optimizers import Adam
@@ -99,7 +100,10 @@ class DefaultActor(object):
     new class and use it in run_ppo_agent.py instead of this default actor.
     """
 
-    def __init__(self, env, var, lr, loss_clipping_epsilon, model = None):
+    def __init__(self, env, var, lr, loss_clipping_epsilon,
+                 model = None, training_logs_file_path = None,
+                 model_saving_path = None, model_saving_interval = 1
+                 ):
         """
         Arguments:
         env -- A Gym environment (can be vanilla or wrapped). We need this
@@ -114,6 +118,12 @@ class DefaultActor(object):
                                  1 - loss_clipping_epsilon and
                                  1 + loss_clipping_epsilon
         model -- A compiled Keras model. If None, then the model is created.
+        training_logs_file_path -- The file where we should save the logs for
+                                   training. This is useful for monitoring loss etc.
+        model_saving_path -- The model will be saved to this filepath after a
+                             certain number of epochs of training
+        model_saving_interval -- The model will be saved to model_saving_path after
+                                 this many epochs
 
         Notes about the model:
         We will use a MLP (Multi Layer Perceptron) with two hidden layers
@@ -143,7 +153,11 @@ class DefaultActor(object):
         self.var = var
         self.lr = lr
         self.loss_clipping_epsilon = loss_clipping_epsilon
+        self.training_logs_file_path = training_logs_file_path
+        self.model_saving_path = model_saving_path
+        self.model_saving_interval = model_saving_interval
 
+        # Define the model
         if model is not None:
             self.model = model
         else:
@@ -176,6 +190,23 @@ class DefaultActor(object):
                     loss_clipping_epsilon = self.loss_clipping_epsilon
                     )
                 )
+
+        # Define the callbacks for training. The callbacks write logs for the
+        # training steps.
+
+        self.callbacks = []
+        # Add the callback for saving model data after regular intervals
+        if self.model_saving_path is not None:
+            callback = ModelCheckpoint(
+                self.model_saving_path,
+                period = self.model_saving_interval
+                )
+            self.callbacks.append(callback)
+
+        # Add the callback for saving logs during training
+        if self.training_logs_file_path is not None:
+            callback = CSVLogger(self.training_logs_file_path, append = True)
+            self.callbacks.append(callback)
 
     def get_policies(self, observations):
         """Return the means and variances for the multivariate Gaussian policy
@@ -234,7 +265,9 @@ class DefaultActor(object):
 
         return actions
 
-    def update_weights(self, observations, targets, advantages, actions):
+    def update_weights(self, observations, targets, advantages, actions,
+                      minibatch_size, epochs
+                      ):
         """Update weights of the model by learning from the data and return
         the loss
 
@@ -245,11 +278,17 @@ class DefaultActor(object):
         targets -- The old predictions. We need this to compute surrogate loss
         advantages -- Finite horizon advantages
         action -- The actions chosen by the agent for this batch of observations
+        minibatch_size -- Minibatch size
+        epochs -- Number of epochs to train on the given data
         """
 
-        loss = self.model.train_on_batch(
+        loss = self.model.fit(
             [observations, advantages, actions],
-            targets
+            targets,
+            batch_size = minibatch_size,
+            epochs = epochs,
+            callbacks = self.callbacks,
+            verbose = False,
             )
 
         return loss
@@ -272,17 +311,29 @@ class DefaultCritic(object):
     new class and use it in run_ppo_agent.py instead of this default critic.
     """
 
-    def __init__(self, env, lr, model = None):
+    def __init__(self, env, lr, model = None, training_logs_file_path = None,
+                 model_saving_path = None, model_saving_interval = 1
+                 ):
         """
         Arguments:
         env -- A Gym environment (can be vanilla or wrapped). We need this
                for infering input and output dimensions of the model.
         lr -- Learning rate
         model -- A compiled Keras model. If None, then the model is created.
+        training_logs_file_path -- The file where we should save the logs for
+                               training. This is useful for monitoring loss etc.
+        model_saving_path -- The model will be saved to this filepath after a
+                             certain number of epochs of training
+        model_saving_interval -- The model will be saved to model_saving_path after
+                                 this many epochs
         """
         self.env = env
         self.lr = lr
+        self.training_logs_file_path = training_logs_file_path
+        self.model_saving_path = model_saving_path
+        self.model_saving_interval = model_saving_interval
 
+        # Define the model
         if model is not None:
             self.model = model
         else:
@@ -300,6 +351,23 @@ class DefaultCritic(object):
 
             self.model.compile(optimizer = Adam(lr = self.lr), loss = "mse")
 
+        # Define the callbacks for training. The callbacks write logs for the
+        # training steps.
+        self.callbacks = []
+
+        # Add the callback for saving model data after regular intervals
+        if self.model_saving_path is not None:
+            callback = ModelCheckpoint(
+                self.model_saving_path,
+                period = self.model_saving_interval
+                )
+            self.callbacks.append(callback)
+
+        # Add the callback for saving logs during training
+        if self.training_logs_file_path is not None:
+            callback = CSVLogger(self.training_logs_file_path, append = True)
+            self.callbacks.append(callback)
+
     def get_value(self, observations):
         """Return the value functions predicted by the critic for the given
         observations
@@ -314,7 +382,7 @@ class DefaultCritic(object):
 
         return values
 
-    def update_weights(self, observations, targets):
+    def update_weights(self, observations, targets, minibatch_size, epochs):
         """Update weights of the model by learning from the data and return
         the loss
 
@@ -325,8 +393,17 @@ class DefaultCritic(object):
         targets -- Value function targets corresponding the observations. In
                    the reference implementation, the targets are computed
                    using a finite horizon version of TD(lambda)
+        minibatch_size -- Minibatch size
+        epochs -- Number of epochs to train on the given data
         """
 
-        loss = self.model.train_on_batch(observations, targets)
+        loss = self.model.fit(
+            observations,
+            targets,
+            batch_size = minibatch_size,
+            epochs = epochs,
+            callbacks = self.callbacks,
+            verbose = False,
+            )
 
         return loss
