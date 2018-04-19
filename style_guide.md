@@ -71,14 +71,16 @@ python test_saved_ppo_agent --saved_actor_model_file_path /path/to/actor/model
 the implementation) as command line arguments.
 
 ```
-python run_ppo_agent --make_reproducible True --numpy_seed 42 --random_seed 1000 --tensorflow_seed 27 ...
+python run_ppo_agent --make_reproducible True --numpy_seed 42 --random_seed 1000
+--tensorflow_seed 27 ...
 ```
 
 2. Save the list of all parameter values used during training to a log file.
 
 ```
 - training_logs
-    - parameters.json # all parameters for this training run, including hyperparameters and seeds should be logged here
+    - parameters.json # all parameters for this training run, including
+                      # hyperparameters and seeds should be logged here
     - other logs go here ...
 ```
 3. Include logs from a reproducible run along with the implementation.
