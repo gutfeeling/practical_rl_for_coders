@@ -331,8 +331,10 @@ class PPOAgent(object):
                     # Run the test
                     average_reward = self.test(
                         monitored_testing_env,
-                        total_number_of_episodes = total_number_of_testing_episodes,
-                        actor = actor, render = False
+                        total_number_of_episodes =
+                            total_number_of_testing_episodes,
+                        actor = actor,
+                        render = False
                         )
                     print(
                         "[{0}] Episode number : {1}, Observation number : {2} "

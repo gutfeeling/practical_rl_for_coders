@@ -110,7 +110,9 @@ parser.add_argument("--total_observations", type = int, default = 5e6)
 parser.add_argument("--test_interval", type = int, default = 5e4)
 
 # Number of episodes to test the agent in every testing round
-parser.add_argument("--total_number_of_testing_episodes", type = int, default = 100)
+parser.add_argument(
+    "--total_number_of_testing_episodes", type = int, default = 100
+    )
 
 # End training related parameters
 
@@ -155,8 +157,8 @@ if __name__ == "__main__":
     if not env_directory_path.exists():
         env_directory_path.mkdir()
 
-    # All data for this training run will be stored under a directory that is named
-    # after the start time of the training run
+    # All data for this training run will be stored under a directory that is
+    # named after the start time of the training run
     timestamp_string = datetime.datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
     timestamp_directory_path = env_directory_path / timestamp_string
 
@@ -164,19 +166,30 @@ if __name__ == "__main__":
 
     # Directories for storing automatic gym logs for training and testing
     # This includes rewards per training episode and videos of test episodes.
-    gym_training_logs_directory_path = timestamp_directory_path / "gym_training_logs"
+    gym_training_logs_directory_path = (
+        timestamp_directory_path / "gym_training_logs"
+        )
 
-    gym_testing_logs_directory_path = timestamp_directory_path / "gym_testing_logs"
+    gym_testing_logs_directory_path = (
+        timestamp_directory_path / "gym_testing_logs"
+        )
 
     # Directory for storing the loss of the actor and the critic
-    keras_training_logs_directory_path = timestamp_directory_path / "keras_training_logs"
+    keras_training_logs_directory_path = (
+        timestamp_directory_path / "keras_training_logs"
+        )
 
     keras_training_logs_directory_path.mkdir()
-    actor_training_logs_file_path = keras_training_logs_directory_path / "actor_logs.csv"
-    critic_training_logs_file_path = keras_training_logs_directory_path / "critic_logs.csv"
 
-    # Filepath for storing the actor and critic models after interval specified by
-    # actor_model_saving_interval and critic_model_saving_interval
+    actor_training_logs_file_path = (
+        keras_training_logs_directory_path / "actor_logs.csv"
+        )
+    critic_training_logs_file_path = (
+        keras_training_logs_directory_path / "critic_logs.csv"
+        )
+
+    # Filepath for storing the actor and critic models after interval specified
+    # by actor_model_saving_interval and critic_model_saving_interval
     actor_model_saving_path = timestamp_directory_path / "actor_model.h5"
     critic_model_saving_path = timestamp_directory_path / "critic_model.h5"
 
@@ -185,8 +198,8 @@ if __name__ == "__main__":
 
     ## Pre training tasks
 
-    # Save parameters before starting training. Useful for future reference and for
-    # reproduction of results.
+    # Save parameters before starting training. Useful for future reference and
+    # for reproduction of results.
 
     with parameters_file_path.open("w") as parameters_fh:
         # Get a dictionary of parameters including hyperparameters,
@@ -216,25 +229,30 @@ if __name__ == "__main__":
     else:
         testing_env = gym.make(args.env)
 
-    # Get the actor. The actor is a pluggable component of this algorithm, so you are always
-    # welcome to define and use your own actors, instead
+    # Get the actor. The actor is a pluggable component of this algorithm, so
+    # you are always welcome to define and use your own actors, instead
     # of using the default one. The default one is just supplied for
     # reference. To use your own actor, define it in models.py
     # and import and use it here.
-    actor = DefaultActor(env = learning_env, var = args.var, lr = args.lr_actor,
-                         loss_clipping_epsilon = args.loss_clipping_epsilon,
-                         training_logs_file_path= str(actor_training_logs_file_path),
-                         model_saving_path = str(actor_model_saving_path),
-                         model_saving_interval = args.actor_model_saving_interval
-                         )
+    actor = DefaultActor(
+        env = learning_env,
+        var = args.var,
+        lr = args.lr_actor,
+        loss_clipping_epsilon = args.loss_clipping_epsilon,
+        training_logs_file_path = str(actor_training_logs_file_path),
+        model_saving_path = str(actor_model_saving_path),
+        model_saving_interval = args.actor_model_saving_interval
+        )
 
-    # Get the critic. The critic is a pluggable component of this algorithm, so you are
-    # welcome to use your own critic too.
-    critic = DefaultCritic(env = learning_env, lr = args.lr_critic,
-                           training_logs_file_path= str(critic_training_logs_file_path),
-                           model_saving_path = str(critic_model_saving_path),
-                           model_saving_interval = args.critic_model_saving_interval
-                           )
+    # Get the critic. The critic is a pluggable component of this algorithm, so
+    # you are welcome to use your own critic too.
+    critic = DefaultCritic(
+        env = learning_env,
+        lr = args.lr_critic,
+        training_logs_file_path = str(critic_training_logs_file_path),
+        model_saving_path = str(critic_model_saving_path),
+        model_saving_interval = args.critic_model_saving_interval
+        )
 
     agent = PPOAgent()
 
@@ -251,7 +269,9 @@ if __name__ == "__main__":
         epochs = args.epochs,
         total_observations = args.total_observations,
         test_interval = args.test_interval,
-        total_number_of_testing_episodes = args.total_number_of_testing_episodes,
-        gym_training_logs_directory_path = str(gym_training_logs_directory_path),
+        total_number_of_testing_episodes =
+            args.total_number_of_testing_episodes,
+        gym_training_logs_directory_path =
+            str(gym_training_logs_directory_path),
         gym_testing_logs_directory_path = str(gym_testing_logs_directory_path)
         )

@@ -119,11 +119,12 @@ class DefaultActor(object):
                                  1 + loss_clipping_epsilon
         model -- A compiled Keras model. If None, then the model is created.
         training_logs_file_path -- The file where we should save the logs for
-                                   training. This is useful for monitoring loss etc.
+                                   training. This is useful for monitoring loss
+                                   etc.
         model_saving_path -- The model will be saved to this filepath after a
                              certain number of epochs of training
-        model_saving_interval -- The model will be saved to model_saving_path after
-                                 this many epochs
+        model_saving_interval -- The model will be saved to model_saving_path
+                                 after this many epochs
 
         Notes about the model:
         We will use a MLP (Multi Layer Perceptron) with two hidden layers
@@ -324,8 +325,8 @@ class DefaultCritic(object):
                                training. This is useful for monitoring loss etc.
         model_saving_path -- The model will be saved to this filepath after a
                              certain number of epochs of training
-        model_saving_interval -- The model will be saved to model_saving_path after
-                                 this many epochs
+        model_saving_interval -- The model will be saved to model_saving_path
+                                 after this many epochs
         """
         self.env = env
         self.lr = lr
