@@ -1,13 +1,24 @@
 import datetime
 import json
 from math import log, sqrt
+import os
 from pathlib import Path
+import random
 
 import argparse
 import gym
+# Keras will be imported later inside the executable block to ensure
+# reproducibility. This file is the only place where we will be departing
+# from PEP8 guidelines for importing all modules at the top of the file as we
+# cannot ensure reproducibility if we stick to it.
+import numpy as np
+import tensorflow as tf
 
 from ppo.env_wrappers import RewardScalingWrapper
-from ppo.models import DefaultActor, DefaultCritic
+# DefaultActor and DefaultCritic from ppo.models will be imported later inside
+# the executable block to ensure reproducibility. This file is the only place
+# where we will be departing from PEP8 guidelines for importing all modules at
+# the top of the file as we cannot ensure reproducibility if we stick to it.
 from ppo.ppo_agent import PPOAgent
 
 parser = argparse.ArgumentParser()
@@ -98,6 +109,37 @@ parser.add_argument("--epochs", type = int, default = 10)
 
 # End hyperparameters
 
+### This section deals with reproducibility. Note the reproducibility comes
+### with a performance penalty as we cannot use Tensorflow's default
+### multithreading anyone - it introduces randomness that cannot be
+### reproduced perfectly.
+
+# Begin reproducibility related parameters
+
+# Whether you want reproducible result. If this is False, then the seed
+# related arguments are ignored.
+parser.add_argument("--make_reproducible", type= bool, default = False)
+
+# Seed for numpy.random
+parser.add_argument("--numpy_seed", type = int, default = 0)
+
+# Seed for Python STDLIB random module
+parser.add_argument("--random_seed", type = int, default = 0)
+
+# Seed for PYTHONHASHSEED
+parser.add_argument("--python_hash_seed", type = int, default = 0)
+
+# Seed for Tensorflow
+parser.add_argument("--tensorflow_seed", type = int, default = 0)
+
+# Seed for Gym environment used for training
+parser.add_argument("--learning_env_seed", type = int, default = 0)
+
+# Seed for Gym environment used for testing
+parser.add_argument("--testing_env_seed", type = int, default = 0)
+
+# End seed related parameters
+
 ### This section deals with training related parameters
 
 # Start training related parameters
@@ -134,6 +176,59 @@ parser.add_argument("--critic_model_saving_interval", type = int, default = 200)
 args = parser.parse_args()
 
 if __name__ == "__main__":
+
+    ## Ensure reproducibility
+    ## See the following section in https://keras.io/getting-started/faq/
+    ## Section : How can I obtain reproducible results using Keras during
+    ## development?
+
+    if args.make_reproducible:
+
+        # The below is necessary in Python 3.2.3 onwards to
+        # have reproducible behavior for certain hash-based operations.
+        # See these references for further details:
+        # https://docs.python.org/3.4/using/cmdline.html#envvar-PYTHONHASHSEED
+        # https://github.com/keras-team/keras/issues/2280#issuecomment-306959926
+
+        os.environ["PYTHONHASHSEED"] = str(args.python_hash_seed)
+
+        # The below is necessary for starting Numpy generated random numbers
+        # in a well-defined initial state.
+
+        np.random.seed(args.numpy_seed)
+
+        # The below is necessary for starting core Python generated random
+        # numbers in a well-defined state.
+
+        random.seed(args.random_seed)
+
+        # Force TensorFlow to use single thread.
+        # Multiple threads are a potential source of
+        # non-reproducible results.
+        # For further details, see:
+        # https://stackoverflow.com/questions/42022950/which-seeds-have-to-be-set-where-to-realize-100-reproducibility-of-training-res
+
+        session_conf = tf.ConfigProto(
+            intra_op_parallelism_threads=1, inter_op_parallelism_threads=1
+            )
+
+        # Keras must be imported after setting numpy.random and random seeds.
+        from keras import backend as K
+
+        # The below tf.set_random_seed() will make random number generation
+        # in the TensorFlow backend have a well-defined initial state.
+        # For further details, see:
+        # https://www.tensorflow.org/api_docs/python/tf/set_random_seed
+
+        tf.set_random_seed(args.tensorflow_seed)
+
+        sess = tf.Session(graph=tf.get_default_graph(), config=session_conf)
+        K.set_session(sess)
+
+    # Contains Keras related imports, so must be imported after everything
+    # to ensure reproducibility
+    from ppo.models import DefaultActor, DefaultCritic
+
 
     ## Create the necessary directories for logging the training process.
     ## Here is the directory structure
@@ -196,6 +291,7 @@ if __name__ == "__main__":
     # Filepath for storing all parameters for this run
     parameters_file_path = timestamp_directory_path / "parameters.json"
 
+
     ## Pre training tasks
 
     # Save parameters before starting training. Useful for future reference and
@@ -218,6 +314,9 @@ if __name__ == "__main__":
     else:
         learning_env = gym.make(args.env)
 
+    if args.make_reproducible:
+        learning_env.seed(args.learning_env_seed)
+
     # Get the testing env. Wrap the vanilla env with the appropriate wrapper
     # or leave it unmodified depending on the testing_env_wrapper
     # hyperparameter
@@ -228,6 +327,9 @@ if __name__ == "__main__":
             )
     else:
         testing_env = gym.make(args.env)
+
+    if args.make_reproducible:
+        testing_env.seed(args.testing_env_seed)
 
     # Get the actor. The actor is a pluggable component of this algorithm, so
     # you are always welcome to define and use your own actors, instead
@@ -255,6 +357,7 @@ if __name__ == "__main__":
         )
 
     agent = PPOAgent()
+
 
     ## Train the agent. Progress will be printed on the command line.
     agent.train(
