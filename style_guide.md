@@ -123,13 +123,13 @@ Gym Wrapper. The wrapped environment should be passed to the agent. The agent sh
 
 1. Use automatic logging provided by high level packages like Keras and Gym instead of writing your own code whenever possible.
 
-```
+```python
 from keras.callbacks import ModelCheckpoint
 
 model.fit(inputs, targets, callbacks = [ModelCheckpoint(),])
 ```
 
-```
+```python
 from gym.wrappers import Monitor
 
 env = gym.make("BipedalWalker-v2")
