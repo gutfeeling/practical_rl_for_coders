@@ -133,9 +133,6 @@ args = parser.parse_args()
 if __name__ == "__main__":
 
     ## Ensure reproducibility
-    ## See the following section in https://keras.io/getting-started/faq/
-    ## Section : How can I obtain reproducible results using Keras during
-    ## development?
 
     if args.make_reproducible:
 
@@ -161,15 +158,15 @@ if __name__ == "__main__":
     ## Create the necessary directories for logging the training process.
     ## Here is the directory structure
     ## training_logs    # log_directory_path
-    ##     - BipedalWalker-v2    # env_directory_path
+    ##     - CartPole-v0    # env_directory_path
     ##         - 2018-04-17_16:36:36    # timestamp_directory_path
     ##             - Logs go here....
     ##             - parameters.json    # parameter_file_path
     ##             - gym_training_logs    # gym_training_logs_directory_path
     ##             - gym_testing_logs    # gym_testing_logs_directory_path
-    ##             - keras_training_logs    # keras_training_logs_directory_path
-    ##             - actor_model.h5    # actor_model_saving_path
-    ##             - critic_model.h5   # critic_model_saving_path
+    ##             - tables    # table_directory_path
+    ##                 - q_value.txt    # q_value_table_file_path
+    ##                 - visit_number_table.txt   # visit_number_table_file_path
     log_directory_path = Path(args.log_directory_path)
 
     if not log_directory_path.exists():
