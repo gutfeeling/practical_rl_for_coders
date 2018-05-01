@@ -121,8 +121,7 @@ class PPOAgent(object):
             observations, critic_targets, minibatch_size, epochs
             )
 
-    def test(self, testing_env, total_number_of_episodes, actor, render,
-             gym_testing_logs_directory_path = None):
+    def test(self, testing_env, total_number_of_episodes, actor, render):
         """Test the PPO agent for a number of episodes and return the average
         reward per episode
 
@@ -142,7 +141,7 @@ class PPOAgent(object):
 
         for episode_number in range(total_number_of_episodes):
 
-            # Start and episode
+            # Start an episode
             observation = testing_env.reset()
 
             while True:
@@ -175,13 +174,6 @@ class PPOAgent(object):
                     break
 
         testing_env.close()
-
-        # Sometimes, we may want to wrap the testing env with a Monitor.
-        # This is useful for automatic video capturing etc.
-        # But there's a bug in the Gym Monitor. The Monitor's close method does
-        # not close the wrapped environment. So we have to do it manually
-        if isinstance(testing_env, Monitor):
-            testing_env.env.close()
 
         # Compute average reward per episode
         average_reward = total_rewards/float(total_number_of_episodes)
@@ -409,5 +401,9 @@ class PPOAgent(object):
         learning_env.close()
 
         # There's a bug in the Gym Monitor. The Monitor's close method does not
-        # close the wrapped environment. So we have to do it manually.
-        learning_env.env.close()
+        # close the wrapped environment. This makes the script exit with an
+        # error if the environment is being rendered at some point. To make
+        # this error go away, we have to close the unwrapped testing
+        # environment. The learning environment is not being rendered, so we
+        # do the same for that.
+        testing_env.env.close()
