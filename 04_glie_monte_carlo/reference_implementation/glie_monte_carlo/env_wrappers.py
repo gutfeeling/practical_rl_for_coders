@@ -53,12 +53,13 @@ class ObservationRoundingWrapper(gym.Wrapper):
         return rounded_observation, reward, done, info
 
     def reset(self):
-        """
-        Note:
-        Gym requires wrappers to define a reset method, whether you want
-        to modify the vanilla environment's reset method or not. If you don't,
-        it throws a warning. The only purpose of this function is to avoid that
-        warning.
+        """Override the reset method of the env to output rounded
+        observation
         """
 
-        return self.env.reset()
+        observation = self.env.reset()
+        rounded_observation = np.round(
+            observation, decimals = self.number_of_decimal_places,
+            )
+
+        return rounded_observation
