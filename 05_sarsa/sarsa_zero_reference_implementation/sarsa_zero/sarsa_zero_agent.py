@@ -325,7 +325,7 @@ class SARSAZeroAgent(object):
                 total_rewards_obtained_in_this_episode += reward
 
                 if done:
-                    
+
                     episode_number +=1
 
                     # Save table to file at regular intervals
@@ -350,5 +350,5 @@ class SARSAZeroAgent(object):
         # error if the environment is being rendered at some point. To make
         # this error go away, we have to close the unwrapped testing
         # environment. The learning environment is not being rendered, so we
-        # do the same for that.
+        # don't need to bother about that.
         testing_env.env.close()

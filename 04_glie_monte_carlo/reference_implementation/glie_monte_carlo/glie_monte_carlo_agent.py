@@ -185,6 +185,8 @@ class GLIEMonteCarloAgent(object):
         discount_factor -- Quantifies how much the agent cares about future
                            rewards while learning. Often referred to as gamma in
                            the literature.
+        start_epsilon -- Probability of random actions at start of training
+        end_epsilon -- Probability of random actions at end of training
         learning_env -- A Gym environment (wrapped or vanilla) used for learning
         testing_env -- A Gym environment (wrapped or vanilla) used for testing.
         total_observations -- Train till this observation number
@@ -331,5 +333,5 @@ class GLIEMonteCarloAgent(object):
         # error if the environment is being rendered at some point. To make
         # this error go away, we have to close the unwrapped testing
         # environment. The learning environment is not being rendered, so we
-        # do the same for that.
+        # don't need to bother about that.
         testing_env.env.close()
