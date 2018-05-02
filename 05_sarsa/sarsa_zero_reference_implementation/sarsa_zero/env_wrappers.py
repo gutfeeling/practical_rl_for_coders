@@ -5,7 +5,7 @@ class ObservationRoundingWrapper(gym.Wrapper):
     """A wrapper that rounds observations to a certain number of decimal places
 
     Notes:
-    The GLIE Monte Carlo method requires that we maintain a dictionary
+    Any table based method requires that we maintain a dictionary
     of Q values for any given state action pair. We should also ensure that
     the number of state action pairs is not too large, because then we would
     have to learn the Q value for all of them. This would take a long time.
@@ -13,7 +13,7 @@ class ObservationRoundingWrapper(gym.Wrapper):
     In environments like CartPole-v0, the observation space is continuous, while
     the action space is discrete and small. The number of state action pair is
     effectively infinite because of the continuous action space. We need to
-    reduce the number of states in order to apply GLIE Monte Carlo to such
+    reduce the number of states in order to apply tabular methods to such
     problems.
 
     In practice, we know that the Q values of state action pairs that do not
