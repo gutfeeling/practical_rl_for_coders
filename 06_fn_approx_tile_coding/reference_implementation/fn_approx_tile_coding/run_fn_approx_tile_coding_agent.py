@@ -8,7 +8,6 @@ import argparse
 import gym
 import numpy as np
 
-from fn_approx_tile_coding.model_and_policy import TileCodingLinearFunction
 from fn_approx_tile_coding.fn_approx_tile_coding_agent import FnApproxAgent
 
 parser = argparse.ArgumentParser()
@@ -145,6 +144,10 @@ if __name__ == "__main__":
 
         random.seed(args.random_seed)
 
+    # In order to ensure reproducibility, we have to violate PEP8 and import
+    # the class using tile coding only after the random module has been
+    # seeded.
+    from fn_approx_tile_coding.model_and_policy import TileCodingLinearFunction
 
     ## Create the necessary directories for logging the training process.
     ## Here is the directory structure
