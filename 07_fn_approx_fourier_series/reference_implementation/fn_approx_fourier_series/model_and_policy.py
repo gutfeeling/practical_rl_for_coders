@@ -66,7 +66,9 @@ class FourierFunction(object):
             self.weights = weights
         # Otherwise, initialize weights to zero.
         else:
-            self.weights = np.array([0 for i in range(self.number_of_features)])
+            self.weights = np.array(
+                [0. for i in range(self.number_of_features)]
+                )
 
         # If eligibility traces is already supplied, use it. Useful for further
         # training from a saved model.
@@ -75,7 +77,7 @@ class FourierFunction(object):
         # Otherwise, initialize eligibility traces to zero
         else:
             self.eligibility_traces = np.array(
-                [0 for i in range(self.number_of_features)]
+                [0. for i in range(self.number_of_features)]
                 )
 
         self.weights_file_path = weights_file_path
@@ -88,7 +90,7 @@ class FourierFunction(object):
         ## gives better results
 
         self.learning_rate_modifiers = np.array(
-            [0 for i in range(self.number_of_features)]
+            [0. for i in range(self.number_of_features)]
             )
 
         # Compute all possible combination of bases
@@ -138,7 +140,7 @@ class FourierFunction(object):
         action -- Gym action
         """
 
-        feature_vector = np.array([0 for i in range(self.number_of_features)])
+        feature_vector = np.array([0. for i in range(self.number_of_features)])
 
         # Compute all possible combination of bases
         bases_iterable = product(
