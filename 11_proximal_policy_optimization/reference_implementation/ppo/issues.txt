@@ -1,0 +1,7 @@
+1. Should we clip actions or is action clipping already implemented in gym
+2. Better printing in the terminal (ppo_agent.py)
+3. Option to reuse trained models (run_ppo_agent.py)
+4. Seed for reproducible result
+    - Seed for layers
+    - Seed for normal
+    - Seed for gym
