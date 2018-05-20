@@ -25,6 +25,6 @@ setup(name = "deep_q_network_nips",
           "opencv-python==3.4.0.14",
           "scipy==1.0.1",
           # Assuming Tensorflow backend (CPU version) for Keras
-          "tensorflow==1.7.0",
+          "tensorflow-gpu==1.8.0",
       ],
 )
