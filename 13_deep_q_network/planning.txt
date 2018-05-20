@@ -1,0 +1,23 @@
+env_wrappers
+
+1. Should take concatenated frames as parameters (cf)
+2. reset should take cf -1 actions. this way we have cf frames for the first
+   observation.
+3. the last cf frames should be saved in a deque like object of size cf.
+4. step should implement frame skip (fs).
+5. step should add up the rewards in the skipped frames.
+6. step should also save the max of fs-1^th and fs^th observation to the deque
+   like object.
+7. step should resize and grayscale observations
+8. step should limit the action space as we did for Pong.
+9. step should return a lazy object which concatenates the frames only when
+   np.array() is called.
+
+
+Order
+
+limit action space
+clip reward
+resize and grayscale
+frame skipping
+frame contatenation
