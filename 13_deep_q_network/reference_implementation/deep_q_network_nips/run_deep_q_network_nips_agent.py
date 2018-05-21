@@ -13,7 +13,7 @@ import gym
 import numpy as np
 import tensorflow as tf
 
-# NeuralNetwork from fn_approx_neural_network.model_and_policy will be imported
+# NeuralNetwork from deep_q_network_nips.model_and_policy will be imported
 # later inside the executable block to ensure reproducibility. This file is the
 # only place where we will be departing from PEP8 guidelines for importing all
 # modules at the top of the file as we cannot ensure reproducibility if we stick
@@ -38,9 +38,13 @@ parser = argparse.ArgumentParser()
 # Start hyperparameters
 
 # The name of the Gym environment to solve. The reference implementation assumes
-# CartPole-v0 and other default hyperparameters have been chosen for
-# this environment. You may need to change some hyperparameters to make it
-# work with other envs.
+# PongNoFrameskip-v4 and other default hyperparameters have been chosen for
+# this environment. You may need to change some  hyperparameters to make it work
+# with other envs.
+
+# Do not use the Pong-v0 or other Pong related environments,
+# because they implement probabilistic frame skipping! They do not allow you
+# to implement the DQN NIPS preprocessing.
 parser.add_argument("--env", default = "PongNoFrameskip-v4")
 
 # Sometimes, we want to modify the environment to make learning easier. We
@@ -60,12 +64,23 @@ parser.add_argument("--learning_env_wrapper",
                         ]
                     )
 
+# Some Gym Atati envs have high degree of variability in rewards. This makes
+# training unstable. So we clip rewards to avoid this.
+
+#Upper bound for rewards.
 parser.add_argument("--reward_upper_bound", type = float, default = 1.0)
 
+# Lower bound for rewards.
 parser.add_argument("--reward_lower_bound", type = float, default = -1.0)
 
+# To make training faster, and to make the agent take decisions at approximately
+# the same speed as a human, we repeat an action for a certain number of
+# frames (let's say the number is frames_to_skip) and consider every
+# frames_to_skipth observation and discard the intermediate observations.
 parser.add_argument("--frames_to_skip", type = int, default = 4)
 
+# To give the agent dymanical information, we concatenate the last few
+# observations.
 parser.add_argument("--number_of_frames_to_concatenate",
                     type = int, default = 4
                     )
@@ -91,6 +106,7 @@ parser.add_argument("--discount_factor", type = float, default = 0.95)
 # Learning rate of the neural network
 parser.add_argument("--lr", type = float, default = 0.0002)
 
+# RMSProp rho. See https://keras.io/optimizers/#rmsprop
 parser.add_argument("--rmsprop_rho", type = float, default = 0.99)
 
 # Epsilon denotes how much the agent explores and it is the probability of
@@ -102,8 +118,10 @@ parser.add_argument("--rmsprop_rho", type = float, default = 0.99)
 parser.add_argument("--start_epsilon", type = float, default = 1)
 parser.add_argument("--end_epsilon", type = float, default = 0.1)
 
+# How many experiences to store in the replay memory.
 parser.add_argument("--replay_memory_size", type = int, default = 10**6)
 
+# Minibatch size for neural netowrk training
 parser.add_argument("--minibatch_size", type = int, default = 32)
 
 # End hyperparameters
@@ -155,11 +173,14 @@ parser.add_argument(
     "--total_number_of_testing_episodes", type = int, default = 100
     )
 
+# Epsilon annealing stops after this many observations. After that, the
+# value of epsilon stays at end_epsilon
 parser.add_argument(
     "--observation_number_when_epsilon_annealing_ends", type = int,
     default = 10**6
     )
 
+# Training starts after the replay memory has this many observations
 parser.add_argument(
     "--observation_number_when_training_starts", type = int, default = 100
     )
@@ -237,7 +258,7 @@ if __name__ == "__main__":
     ## Create the necessary directories for logging the training process.
     ## Here is the directory structure
     ## training_logs    # log_directory_path
-    ##     - CartPole-v0    # env_directory_path
+    ##     - PongNoFrameskip-v4    # env_directory_path
     ##         - 2018-04-17_16:36:36    # timestamp_directory_path
     ##             - Logs go here....
     ##             - parameters.json    # parameter_file_path

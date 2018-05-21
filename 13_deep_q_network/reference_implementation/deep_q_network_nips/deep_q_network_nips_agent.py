@@ -6,8 +6,7 @@ from gym.wrappers import Monitor
 
 
 class DQNNIPSAgent(object):
-    """Agent using a linear model for mapping observation action pairs to Q
-    values.
+    """Agent using a Deep Q Network to solve Atari environments in OpenAI Gym
     """
 
     def get_epsilon(self, start_epsilon, end_epsilon, observation_number,
@@ -20,11 +19,15 @@ class DQNNIPSAgent(object):
         start_epsilon -- Training starts with this value of epsilon
         end_epsilon -- Training ends with this value of epsilon
         observation_number -- Current observation number
-        total_observations -- Total observations to train on
+        observation_number_when_epsilon_annealing_ends -- Epsilon annealing
+                                                          ends when
+                                                          observation_number
+                                                          reaches this value
 
         Note:
         Epsilon is linearly annealed from start_epsilon to end_epsilon during
-        training.
+        training till observation_number reaches
+        observation_number_when_epsilon_annealing_ends.
         """
 
         if observation_number > observation_number_when_epsilon_annealing_ends:
@@ -42,7 +45,8 @@ class DQNNIPSAgent(object):
             )
 
     def test(self, testing_env, total_number_of_episodes, function,
-             epsilon, render):
+             epsilon, render
+             ):
 
         """Test the agent for a number of episodes and return the
         average reward per episode
@@ -51,6 +55,7 @@ class DQNNIPSAgent(object):
         total_number_of_episodes -- Test for this many episodes
         function -- An instance of the class implemnenting the
                     function approximation model
+        epsilon -- Probability of random actions
         render -- A Boolean indicating whether to render the environment or not
         """
 
@@ -102,9 +107,20 @@ class DQNNIPSAgent(object):
                            the literature.
         start_epsilon -- Probability of random actions at start of training
         end_epsilon -- Probability of random actions at end of training
+        observation_number_when_epsilon_annealing_ends -- Epsilon annealing
+                                                          ends when
+                                                          observation_number
+                                                          reaches this value
+        replay_memory_size -- Replay memory contains at most this many
+                              experiences at any given point in training.
+                              When replay memory grows bigger than this, some
+                              of the earlier experiences are thrown away.
         learning_env -- A Gym environment (wrapped or vanilla) used for learning
         testing_env -- A Gym environment (wrapped or vanilla) used for testing.
         total_observations -- Train till this observation number
+        observation_number_when_training_starts -- Training starts when
+                                                   observation_number
+                                                   reaches this value
         test_interval -- Test after this many observations
         total_number_of_testing_episodes -- Number of episodes to test the agent
                                             in every testing round
@@ -136,6 +152,8 @@ class DQNNIPSAgent(object):
             write_upon_reset = True,
             )
 
+        # To ensure that the replay memory never exceeds replay_memory_size,
+        # we use a deque, which is a last in, first out type of data structure
         replay_memory = deque([], maxlen = replay_memory_size)
 
         while observation_number < total_observations:
@@ -148,8 +166,8 @@ class DQNNIPSAgent(object):
             # Execute an episode
             while True:
 
-                # Determine the next action. This is required for the
-                # model update.
+                # Determine the action according to the epsilon greedy policy
+
                 epsilon = self.get_epsilon(
                     start_epsilon, end_epsilon, observation_number,
                     observation_number_when_epsilon_annealing_ends,
@@ -160,6 +178,7 @@ class DQNNIPSAgent(object):
                 # take the action determined by the epsilon-greedy policy
                 next_observation, reward, done, info = learning_env.step(action)
 
+                # Store experience in replay memory
                 transition = {
                     "observation" : observation,
                     "action" : action,
@@ -170,9 +189,8 @@ class DQNNIPSAgent(object):
 
                 replay_memory.append(transition)
 
-
+                # # Update the model
                 if observation_number > observation_number_when_training_starts:
-                    # Update the model
                     function.update_model(discount_factor, replay_memory)
 
                 observation = next_observation

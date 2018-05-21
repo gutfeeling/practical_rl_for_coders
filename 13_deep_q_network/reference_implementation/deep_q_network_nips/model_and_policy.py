@@ -10,12 +10,12 @@ import numpy as np
 class NeuralNetwork(object):
     """This class is responsible for the following.
 
-    1. Map observations to Q values using a neural network.
+    1. Get features from observation
+    1. Map features to Q values using a neural network.
     3. Update the model using the experience supplied by the agent.
     4. Implement an epsilon greedy policy based on the model.
 
-    This implementation assumes a continuous observation space and a discrete
-    action space.
+    This implementation assumes the Atari environments in OpenAI Gym.
     """
 
     def __init__(self, env, lr, rmsprop_rho, minibatch_size, model = None,
@@ -26,7 +26,8 @@ class NeuralNetwork(object):
         Arguments:
         env -- A Gym environment (can be vanilla or wrapped). We need this
                for infering input and output dimensions of the model.
-        lr -- Learning rate
+        lr -- Learning rate in RMSprop
+        rmsprop_rho -- Rho in RMSProp, see https://keras.io/optimizers/#rmsprop
         model -- A compiled Keras model. If None, then the model is created.
         training_logs_file_path -- The file where we should save the logs for
                                    training. This is useful for monitoring loss
@@ -34,7 +35,11 @@ class NeuralNetwork(object):
         model_saving_file_path -- The model will be saved to this filepath after
                                   a certain number of epochs of training
         model_saving_interval -- The model will be saved to
-                                 model_saving_file_path after this many epochs.
+                                 model_saving_file_path after this many epochs
+
+        Notes:
+        The neural network architecture is the same as used in the DQN NIPS
+        paper https://arxiv.org/abs/1312.5602
         """
         self.env = env
         self.lr = lr
@@ -97,6 +102,23 @@ class NeuralNetwork(object):
             self.callbacks.append(callback)
 
     def get_feature_array_from_observation(self, observation):
+        """Get feature from observation
+
+        Arguments:
+        observation -- Gym observation
+
+        Notes:
+        In the case of Atari environments, we wrap them so that they usually
+        return 4 concatenated 84 x 84 grayscale images. The pixels have
+        values from 0 to 255. We do this because the replay memory contains
+        lots of observations and is held in the RAM. To save memory, we store
+        pixels as integers since they take up less memory than floats.
+
+        Before feeding this into the neural network, it is a good idea to scale
+        the pixels and convert them to floats that lie between 0 and 1. Neural
+        netowrks work better with floats. This is exactly what we do in this
+        function.
+        """
 
         feature_array = np.array(
             [
@@ -110,27 +132,36 @@ class NeuralNetwork(object):
 
     def update_model(self, discount_factor, replay_memory):
         """Update the weights of the model given the agent's experience using
-        SARSA(0)
+        Q learning update (off policy)
 
         Arguments:
         discount_factor -- Quantifies how much the agent cares about future
                            rewards while learning. Often referred to as gamma in
                            the literature.
-        observation -- Last observation seen by agent
-        action -- Last action taken by agent
-        reward -- Last reward received by agent
-        done -- Whether epsiode ended after last action
-        next_observation -- The observation after taking the last action
-        next_action -- The next action to be taken by the agent according to
-                       the epsilon greedy policy
+        replay_memory -- Replay memory is a deque containing experiences.
+                         Experiences are of the form:
+                         {
+                            "observation" : observation,
+                            "action" : action,
+                            "reward" : reward,
+                            "done" : done,
+                            "next_observation" : next_observation
+                            }
         """
 
+        ## Choose a minibatch of experiences randomly from the replay memory.
+
         replay_memory_size = len(replay_memory)
+
+        # We choose random indices in the replay memory. The experiences stored
+        # in these indices is our minibatch.
 
         transition_indices = [
             random.randint(0, replay_memory_size - 1)
             for i in range(self.minibatch_size)
             ]
+
+        ## Get current model predictions on the observations in minibatch
 
         model_input = np.array(
             [
@@ -142,6 +173,8 @@ class NeuralNetwork(object):
 
         predictions = self.model.predict_on_batch(model_input)
 
+        ## Get current model predictions on the next observation in minibatch
+
         next_model_input = np.array(
             [
                 self.get_feature_array_from_observation(
@@ -151,6 +184,8 @@ class NeuralNetwork(object):
             )
 
         next_predictions = self.model.predict_on_batch(next_model_input)
+
+        ## Get Q learning targets
 
         targets = []
         for i in range(len(transition_indices)):
