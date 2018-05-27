@@ -32,4 +32,4 @@ you have picked up the required knowledge for this module.
 # Assignments
 
 This module is reading only. There are no assignments. The goal is to get you excited about Reinforcement Learning. So if you 
-feel excited already, then you can go onto [Module 2: Reinforcement Learning Basics with OpenAI Gym](https://github.com/gutfeeling/rl_for_coders/tree/master/02_rl_basics_with_openai_gym).
+feel excited already, then you can go onto [Module 2: Reinforcement Learning Basics with OpenAI Gym](https://github.com/gutfeeling/practical_rl_for_coders/tree/master/02_rl_basics_with_openai_gym).
