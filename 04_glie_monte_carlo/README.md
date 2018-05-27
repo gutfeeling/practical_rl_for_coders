@@ -14,6 +14,6 @@ The reading materials are a collection of free online resources that cover many 
 
 After you are done studying the listed materials, try solving the assignments.
 
-1. [RL Course by David Silver, Lecture 5: Model Free Contrl (Till 38:46)](https://www.youtube.com/watch?v=lfHX2hHRMVQ&t)
+1. [RL Course by David Silver, Lecture 5: Model Free Control (Till 38:46)](https://www.youtube.com/watch?v=lfHX2hHRMVQ&t)
 2. [Coding Style Guide](https://github.com/gutfeeling/practical_rl_for_coders/blob/master/style_guide.md)
 3. [CartPole-v0 Environment Details](https://github.com/openai/gym/wiki/Leaderboard#cartpole-v0)
