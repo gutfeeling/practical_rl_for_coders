@@ -9,15 +9,11 @@ Reinforcement Learning engineers.
 
 # Required reading
 
-Students enrolled in the course have access to lecture videos, coding screencasts and assignment solutions. You **do not** need to 
-go through the reading material listed here, though it doesn't hurt if you are curious.
+This section is for students who are financially disadvantaged and are not able to pay for the full course. You should still be able to learn a lot by going through the reading material listed below and solving the assignments.
 
-This section is for students who are financially disadvantaged and are not able to pay for the course. The reading materials are a 
-collection of free online resources that cover many of the things that I address in the course videos (though not everything 
-unfortunately). It's best to go through them in the order listed. 
+The reading materials are a collection of free online resources that cover many of the things that I address in the course videos (though not everything unfortunately). It's best to go through them in the order listed. 
 
-After you are done studying the listed materials, try solving the assignments. If you can solve the assignments without problems, 
-you have picked up the required knowledge for this module.
+After you are done studying the listed materials, try solving the assignments.
 
 ## Reinforcement Learning Breakthroughs
 
