@@ -9,6 +9,8 @@ We will code up an agent that takes random actions in the CartPole-v0 environmen
 baseline. OpenAI Gym specfic techniques such Environment Wrapping and Monitoring will also be covered, so that you can 
 modify environments to your liking and capture data/videos automatically.
 
+Not all machine learning problems are best solved using Reinforcement Learning. At the end, we are going to discuss the difference between Supervised Learning and Reinforcement Learning and talk about when to and when not to apply Reinforcement Learning.
+
 # Required reading
 
 This section is for students who are financially disadvantaged and are not able to pay for the full course. You should still be able to learn a lot by going through the reading material listed below and solving the assignments.
