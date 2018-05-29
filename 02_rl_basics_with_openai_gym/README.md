@@ -5,11 +5,13 @@ OpenAI Gym to get a practical feeling for all components of a Reinforcement Lear
 Actions and Rewards. We will talk about the learning goal of Reinforcement Learning and how to define it in terms of maximizing 
 the discounted reward sum. 
 
+At the end, we are going to discuss the difference between Supervised Learning and Reinforcement Learning and talk about when to and when not to apply Reinforcement Learning.
+
+## Lab
+
 We will code up an agent that takes random actions in the CartPole-v0 environment and talk about the importance of a random 
 baseline. OpenAI Gym specfic techniques such Environment Wrapping and Monitoring will also be covered, so that you can 
 modify environments to your liking and capture data/videos automatically.
-
-Not all machine learning problems are best solved using Reinforcement Learning. At the end, we are going to discuss the difference between Supervised Learning and Reinforcement Learning and talk about when to and when not to apply Reinforcement Learning.
 
 # Required reading
 
