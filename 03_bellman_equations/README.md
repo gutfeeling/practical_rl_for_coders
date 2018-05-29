@@ -7,8 +7,9 @@ With these ingredients, we will be able to explore the Bellman equations and Bel
 can iteratively solve a Reinforcement Learning problem with the help of the Bellman equations and theorems (value iteration and 
 Q value iteration). This will be foundational in many Reinforcement Learning algorithms that we will learn later in the course. 
 
-On the practical side, we will determine the value function for a toy policy in the CartPole-v0 environment using value 
-iterations. 
+## Lab
+
+In the lab, we will use value iterations to determine how good a particular state is in the CartPole-v0 environment for a given policy.
 
 # Required reading
 
