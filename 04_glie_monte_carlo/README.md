@@ -3,7 +3,9 @@
 In this module, we will learn our first Reinforcement Learning algorithm. It's called GLIE (Greedy in the Limit of Infinite 
 Exploration) Monte Carlo. 
 
-We will also code up an agent that solves the CartPole-v0 environment using the GLIE Monte Carlo algorithm. While we are at it,
+## Lab
+
+We will code up an agent that solves the CartPole-v0 environment using the GLIE Monte Carlo algorithm. While we are at it,
 we will discuss best practices for organizing and writing code for Reinforcement Learning.
 
 # Required reading
