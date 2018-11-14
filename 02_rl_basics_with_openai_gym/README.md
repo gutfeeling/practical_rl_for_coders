@@ -3,7 +3,8 @@
 At the end of this module
 
 1. You will be able to install OpenAI Gym and control an agent in the CartPole-v0 environment using Python
-2. You will be able to go for a walk? :running:
+2. You will be able to go for a walk? :walking:
+I :heart: you!
 
 
 In this module, we will learn about the basic building blocks of Reinforcement Learning. We will use the Python package 
