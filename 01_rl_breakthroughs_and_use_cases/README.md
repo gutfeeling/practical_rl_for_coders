@@ -7,11 +7,11 @@ attention
 2. You will be able to list some common use cases for RL in the industry
 3. You will be able to name a few companies using RL
 
-## Module 1: RL Breakthroughs and Use Cases
+## Plan 
 
-1. Welcome to the course!
-2. Reinforcement Learning breakthroughs
-3. Who is using RL in the industry?
+1. :movie_camera: Welcome to the course!
+2. :movie_camera: Reinforcement Learning breakthroughs
+3. :movie_camera: Who is using RL in the industry?
 
 ## References
 
