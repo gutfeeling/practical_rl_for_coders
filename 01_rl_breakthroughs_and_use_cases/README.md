@@ -1,21 +1,21 @@
 # Module 1: Reinforcement Learning Breakthroughs and Use Cases
 
-In the first module of this course, I want to get you excited about Reinforcement Learning. In the last 5 years, we have witnessed
-multiple breakthroughs in AI coming from research on Reinforcement Learning. We will go through some of these breakthroughs in 
-layman's terms and try to understand why they are so remarkable and exciting. 
+At the end of this module
 
-We will also take a look at how some of these breakthroughs are being commercialized in the industry, creating demand for 
-Reinforcement Learning engineers.
+1. You will be able to describe recent breakthroughs in Reinforcement Learning that has brought this field at the forefront of
+attention
+2. You will be able to list some common use cases for RL in the industry
+3. You will be able to name a few companies using RL
 
-# Required reading
+## Module 1: RL Breakthroughs and Use Cases
 
-This section is for students who are financially disadvantaged and are not able to pay for the full course. You should still be able to learn a lot by going through the reading material listed below and solving the assignments.
+1. Welcome to the course!
+2. Reinforcement Learning breakthroughs
+3. Who is using RL in the industry?
 
-The reading materials are a collection of free online resources that cover many of the things that I address in the course videos (though not everything unfortunately). It's best to go through them in the order listed. 
+## References
 
-After you are done studying the listed materials, try solving the assignments.
-
-## Reinforcement Learning Breakthroughs
+### Reinforcement Learning Breakthroughs
 
 1. [Google Deepmind Blog Post on Deep Reinforcement Learning](https://deepmind.com/blog/deep-reinforcement-learning/)
 2. [Google Deepmind Blog Post on AlphaGo](https://deepmind.com/research/alphago/)
@@ -23,9 +23,4 @@ After you are done studying the listed materials, try solving the assignments.
 4. [OpenAI Video of its DOTA 2 Bot at The International](https://openai.com/the-international/)
 5. [OpenAI Blog Post on Proximal Policy Optimization](https://blog.openai.com/openai-baselines-ppo/)
 
-## Reinforcement Learning in the Industry
-
-# Assignments
-
-This module is reading only. There are no assignments. The goal is to get you excited about Reinforcement Learning. So if you 
-feel excited already, then you can go onto [Module 2: Reinforcement Learning Basics with OpenAI Gym](https://github.com/gutfeeling/practical_rl_for_coders/tree/master/02_rl_basics_with_openai_gym).
+### Reinforcement Learning in the Industry
