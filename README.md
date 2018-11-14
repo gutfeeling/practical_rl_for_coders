@@ -67,7 +67,7 @@ Which one is better?*
 ### Module 6: Function approximation (Tile Coding)
 
 1. **Exercise**: *Try to solve `MountainCar-v0` using GLIE Monte Carlo, SARSA(0) and SARSA(lambda). Explain the agent's
-performance on both algorithms.*
+performance on the three algorithms.*
 2. Limitations of table based methods
 3. Tables to functions
 4. Linear functions - features, weights, gradient descent and update rule
@@ -77,7 +77,7 @@ observations of `MountainCar-v0`.*
 7. **Exercise**: *Modify `ModelAndPolicy` to include a instance variable for weights and write a method
 that returns the Q value by using linear function approximation.*
 8. **Exercise**: *Modify the update rule in `ModelAndPolicy`*
-9. **Exercise**: *Visualize the learned function using Matplotlib*
+9. **Exercise**: *Visualize the learned function using `matplotlib`*
 10. Theoretical guarantees of convergence
 
 ### Module 7: Function approximation (Fourier Series)
@@ -114,7 +114,7 @@ learning rate per feature and write a method that returns the Q value by using l
 ### Module 9: Function approximation (Neural Network)
 
 1. Neural Networks as function approximators
-2. **Exercise**: *Modify `ModelAndPolicy for `CartPole-v0` to use a `Keras` model for function approximation.*
+2. **Exercise**: *Modify `ModelAndPolicy` for `CartPole-v0` to use a `Keras` model for function approximation.*
 3. **Exercise**: *Modify the update rule in `ModelAndPolicy` to implement `Keras model` fitting based on
 SARSA(0).*
 4. Theoretical limits on convergence for Neural Networks as function approximators
