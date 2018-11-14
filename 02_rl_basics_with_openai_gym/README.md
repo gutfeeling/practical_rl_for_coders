@@ -1,5 +1,11 @@
 # Module 2: Reinforcement Learning Basics with OpenAI Gym
 
+At the end of this module
+
+1. You will be able to install OpenAI Gym and control an agent in the CartPole-v0 environment using Python
+2. You will be able to go for a walk? :running:
+
+
 In this module, we will learn about the basic building blocks of Reinforcement Learning. We will use the Python package 
 OpenAI Gym to get a practical feeling for all components of a Reinforcement Learning problem - the Agent, the Environment, 
 Actions and Rewards. We will talk about the learning goal of Reinforcement Learning and how to define it in terms of maximizing 
