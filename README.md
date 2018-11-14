@@ -57,7 +57,7 @@ the agent twice and check if results are reproducible.*
 2. The SARSA(0) update
 3. Learning rate and its schedule
 4. **Exercise**: *Modify `GLIEMonteCarloAgent` to include a function for learning rate schedule.*
-5. **Exercise**: *Modify ``GLIEMonteCarloAgent` and `ModelAndPolicy` to use the SARSA(0) updates.*
+5. **Exercise**: *Modify `GLIEMonteCarloAgent` and `ModelAndPolicy` to use the SARSA(0) updates.*
 6. SARSA(lambda)
 7. **Exercise**: *Modify `ModelAndPolicy` to add a table for eligibility traces and implement the 
 SARSA(lambda) update.*
