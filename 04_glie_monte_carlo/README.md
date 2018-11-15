@@ -20,9 +20,9 @@ Carlo updates.*
 5. :movie_camera: Exploration vs. Exploitation - epsilon greedy policies and epsilon annealing
 6. :pencil: **Exercise**: *Modify the `Agent` class to create an epsilon schedule during training.*
 7. :pencil: **Exercise**: *Modify the `ModelAndPolicy` class to implement an epsilon greedy policy.*
-8. :movie_camera: Creating the hyperparameter file
+8. :movie_camera: Creating the starter script
 9. :movie_camera: Importance of reproducibility in RL
-10. :pencil: **Exercise**: *Add command line options related to reproducibility in the hyperparamete file. Use `argparse`. Run
+10. :pencil: **Exercise**: *Add command line options related to reproducibility in the starter script. Use `argparse`. Run
 the agent twice and check if results are reproducible.*
 
 # References
