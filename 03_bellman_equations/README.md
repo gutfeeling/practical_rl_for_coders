@@ -14,7 +14,7 @@ any state in the `CartPole-v0` environment, given a policy
 2. :movie_camera: Value function and Q value function
 3. :movie_camera: The Bellman equation and optimality theorem
 4. :movie_camera: Value iteration
-5. :pencil: **Exercise**: *Wrap the CartPole environment to make it amenable to value iterations. Discretize observations to
+5. :pencil: **Exercise**: *Wrap the `CartPole-v0` environment to make it amenable to value iterations. Discretize observations to
 first place of decimal.*
 6. :pencil: **Exercise**: *Given a policy, find the values for a list of states.*
 
