@@ -9,7 +9,7 @@ building blocks of RL
 4. You will be able to define the learning goal of the agent in terms of maximizing the discounted reward sum
 5. You will be able to able to modify `OpenAI Gym` environments, run simple training and testing loops, and 
 log/monitor the agents action
-5. You will be able to decide whether to apply RL or supervised learning to a generic machine learning problem
+5. You will be able to decide whether RL or supervised learning is more suited to a given real world problem
 
 ## Plan
 
