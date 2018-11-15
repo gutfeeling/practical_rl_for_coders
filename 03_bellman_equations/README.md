@@ -5,7 +5,7 @@ At the end of this module
 1. You will be able to cast RL problems as Markov Decision Processes (MDP)
 2. You will be able to define value function and Q value function of the states in a MDP
 3. You will be able to explain the contents of the Bellman equations and Bellman optimality theorems applied to MDPs
-4. You will be able to perform value function updates and Q value function updates to determine the desirability of a
+4. You will be able to perform value function updates and Q value function updates to determine the desirability of 
 any state in the `CartPole-v0` environment, given a policy
 
 ## Plan
