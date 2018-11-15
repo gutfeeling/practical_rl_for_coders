@@ -20,8 +20,8 @@ log/monitor the agents action
 5. :pencil: **Exercise**: *Implement a training and testing loop for a random policy in the CartPole-v0 environment.*
 6. :movie_camera: The importance of baselines
 7. :movie_camera: `OpenAI Gym` environment wrappers
-8. :pencil: **Exercise**: *Wrap the `CartPole-v0` :movie_camera: environment to change the reward signature. The agent should get -1 reward if the
-pole angle exceeds 15 :movie_camera: degrees and 0 otherwise.*
+8. :pencil: **Exercise**: *Wrap the `CartPole-v0` environment to change the reward signature. The agent should get -1 reward if the
+pole angle exceeds 15 degrees and 0 otherwise.*
 9. :movie_camera: Monitoring using `OpenAI Gym`
 10. :pencil: **Exercise**: *Implement automatic monitoring for the training and testing loops you wrote earlier.*
 11. :movie_camera: Supervised learning vs. RL - when to use which?
