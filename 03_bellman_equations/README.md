@@ -1,23 +1,24 @@
 # Module 3: Bellman Equations
 
-In this module, we will see Reinforcement Learning through the lens of Markov Decision Processes. We will also define value functions and 
-Q value functions. 
+At the end of this module
 
-With these ingredients, we will be able to explore the Bellman equations and Bellman optimatily theorems. We will see how one 
-can iteratively solve a Reinforcement Learning problem with the help of the Bellman equations and theorems (value iteration and 
-Q value iteration). This will be foundational in many Reinforcement Learning algorithms that we will learn later in the course. 
+1. You will be able to cast RL problems as Markov Decision Processes (MDP)
+2. You will be able to define value function and Q value function of the states in a MDP
+3. You will be able to explain the contents of the Bellman equations and Bellman optimality theorems applied to MDPs
+4. You will be able to perform value function updates and Q value function updates to determine the desirability of a
+any state in the `CartPole-v0` environment, given a policy
 
-## Lab
+## Plan
 
-In the lab, we will use value iterations to determine how good a particular state is in the CartPole-v0 environment for a given policy.
+1. :movie_camera: Markov Decision Processes
+2. :movie_camera: Value function and Q value function
+3. :movie_camera: The Bellman equation and optimality theorem
+4. :movie_camera: Value iteration
+5. :pencil: **Exercise**: *Wrap the CartPole environment to make it amenable to value iterations. Discretize observations to
+first place of decimal.*
+6. :pencil: **Exercise**: *Given a policy, find the values for a list of states.*
 
-# Required reading
-
-This section is for students who are financially disadvantaged and are not able to pay for the full course. You should still be able to learn a lot by going through the reading material listed below and solving the assignments.
-
-The reading materials are a collection of free online resources that cover many of the things that I address in the course videos (though not everything unfortunately). It's best to go through them in the order listed. 
-
-After you are done studying the listed materials, try solving the assignments.
+# References
 
 1. [RL Course by David Silver, Lecture 2: Markov Decision Processes](https://www.youtube.com/watch?v=lfHX2hHRMVQ&t)
 2. [RL Course by David Silver, Lecture 3: Planning by Dynamic Programming](https://www.youtube.com/watch?v=lfHX2hHRMVQ&t)
