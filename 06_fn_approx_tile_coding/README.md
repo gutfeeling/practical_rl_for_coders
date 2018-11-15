@@ -27,5 +27,5 @@ that returns the Q value by using linear function approximation.*
 
 ## References
 
-1. [Reinforcement Learning: An Introduction, Second Edition, Section 9.1 - 9.4 & Section 9.5.4](https://drive.google.com/file/d/1xeUDVGWGUUv1-ccUMAZHJLej2C7aAFWY/view)
+1. [Reinforcement Learning: An Introduction, Second Edition, Section 9.1 - 9.4 & Section 9.5.4](https://drive.google.com/file/d/1opPSz5AZ_kVa1uWOdOiveNiBFiEOHjkG/view)
 2. [Tile Coding Software - Reference Manual, Version 2.1, Python version](http://incompleteideas.net/rlai.cs.ualberta.ca/RLAI/RLtoolkit/tiles.html)
