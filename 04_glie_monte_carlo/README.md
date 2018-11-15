@@ -2,7 +2,7 @@
 
 At the end of this module
 
-1. You will implement your first RL algorithm (GLIE Monte Carlo) to solve the `CartPole-v0` environment
+1. You will implement your first RL algorithm (GLIE Monte Carlo) to solve the `CartPole-v0` environment :tada:
 2. You will be able to list a set of best practices when writing RL code in Python
 3. You will be able to explain why an agent needs to simultaneously explore and exploit to solve an environment
 4. You will be able to integrate epsilon-greedy exploration/exploitation schemes in your code
