@@ -8,7 +8,7 @@ building blocks of RL
 3. You will be able to explain the output returned the `env.step(action)` method of `OpenAI Gym`
 4. You will be able to define the learning goal of the agent in terms of maximizing the discounted reward sum
 5. You will be able to able to modify `OpenAI Gym` environments, run simple training and testing loops, and 
-log/monitor the agents action
+log/monitor the agent's action
 5. You will be able to decide whether RL or supervised learning is more suited to a given real world problem
 
 ## Plan
