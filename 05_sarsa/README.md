@@ -5,6 +5,8 @@ At the end of this module
 1. You will be able to explain the weaknesses of the GLIE Monte Carlo algorithm in terms of bias and variance 
 2. You will implement a Reinforcement Learning algorithm called SARSA(lambda), which allows you to tune the 
 level of bias and variance :tada:
+3. You will be able to explain why a constant learning rate is undesirable, and integrate learning rate schedules
+in your code
 
 ## Plan
 
