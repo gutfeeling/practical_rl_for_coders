@@ -3,7 +3,8 @@
 At the end of this module
 
 1. You will be able to decide when and when not to use tabular methods for environment modeling
-2. You will be able to explain why function approximation is needed for environments with large state spaces
+2. You will be able to explain why function approximation is needed for environments with large state spaces or  
+inaccessible-via-exploration states 
 3. You will implement linear function approximation and tile coding to solve the `MountainCar-v0` environment :tada: 
 4. You will be able to give examples of situations where function approximation guarantees optimal behavior and 
    situations where there are no guarantees (and the only way out is trial-and-error) 
