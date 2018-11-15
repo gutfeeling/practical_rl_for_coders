@@ -2,7 +2,7 @@
 
 At the end of this module
 
-1. You will implement a Neural Network in conjunction with SARSA(0) to solve the `CartPole-v0` environment :tada:
+1. You will implement your first Deep RL algorithm (Deep SARSA) to solve the `CartPole-v0` environment :tada:
 2. You will be able to list the difficulties associated with using Neural Networks successfully in RL
 
 ## Plan
