@@ -2,31 +2,31 @@
 
 At the end of this module
 
-1. You will be able to install OpenAI Gym and control an agent in the CartPole-v0 environment using Python
-2. You will be able to go for a walk? :walking:
-I :heart: you!
+1. You will be able to explain the concept of Agent, Environment, Action and Rewards. These are the basic
+building blocks of RL
+2. You will be able to install `OpenAI Gym`, instantiate environments, and control agents using Python
+3. You will be able to explain the output returned the `env.step(action)` method of `OpenAI Gym`
+4. You will be able to define the learning goal of the agent in terms of maximizing the discounted reward sum
+5. You will be able to able to modify `OpenAI Gym` environments, run simple training and testing loops, and 
+log/monitor the agents action
+5. You will be able to decide whether to apply RL or supervised learning to a generic machine learning problem
 
+## Plan
 
-In this module, we will learn about the basic building blocks of Reinforcement Learning. We will use the Python package 
-OpenAI Gym to get a practical feeling for all components of a Reinforcement Learning problem - the Agent, the Environment, 
-Actions and Rewards. We will talk about the learning goal of Reinforcement Learning and how to define it in terms of maximizing 
-the discounted reward sum. 
+1. :movie_camera: What is `OpenAI Gym`?
+2. :movie_camera: `OpenAI Gym` installation
+3. :movie_camera: Agent, Environment, State, Action, Rewards
+4. :movie_camera: Policy and discount rate
+5. :pencil: **Exercise**: *Implement a training and testing loop for a random policy in the CartPole-v0 environment.*
+6. :movie_camera: The importance of baselines
+7. :movie_camera: `OpenAI Gym` environment wrappers
+8. :pencil: **Exercise**: *Wrap the `CartPole-v0` :movie_camera: environment to change the reward signature. The agent should get -1 reward if the
+pole angle exceeds 15 :movie_camera: degrees and 0 otherwise.*
+9. :movie_camera: Monitoring using `OpenAI Gym`
+10. :pencil: **Exercise**: *Implement automatic monitoring for the training and testing loops you wrote earlier.*
+11. :movie_camera: Supervised learning vs. RL - when to use which?
 
-At the end, we are going to discuss the difference between Supervised Learning and Reinforcement Learning and talk about when to and when not to apply Reinforcement Learning.
-
-## Lab
-
-We will code up an agent that takes random actions in the CartPole-v0 environment and talk about the importance of a random 
-baseline. OpenAI Gym specfic techniques such Environment Wrapping and Monitoring will also be covered, so that you can 
-modify environments to your liking and capture data/videos automatically.
-
-# Required reading
-
-This section is for students who are financially disadvantaged and are not able to pay for the full course. You should still be able to learn a lot by going through the reading material listed below and solving the assignments.
-
-The reading materials are a collection of free online resources that cover many of the things that I address in the course videos (though not everything unfortunately). It's best to go through them in the order listed. 
-
-After you are done studying the listed materials, try solving the assignments.
+## References
 
 1. [RL Course by David Silver, Lecture 1: Introduction to Reinforcement Learning](https://www.youtube.com/watch?v=2pWv7GOvuf0)
 2. [Getting Started with Gym](https://gym.openai.com/docs/#getting-started-with-gym)
