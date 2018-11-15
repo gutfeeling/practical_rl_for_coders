@@ -23,7 +23,7 @@ Carlo updates.*
 8. :movie_camera: Creating the hyperparameter file
 9. :movie_camera: Importance of reproducibility in RL
 10. :pencil: **Exercise**: *Add command line options related to reproducibility in the hyperparamete file. Use `argparse`. Run
-the agent twice and check if results are reproducible.
+the agent twice and check if results are reproducible.*
 
 # References
 
