@@ -25,7 +25,7 @@ Carlo updates.*
 10. :pencil: **Exercise**: *Add command line options related to reproducibility in the starter script. Use `argparse`. Run
 the agent twice and check if results are reproducible.*
 
-# References
+## References
 
 1. [RL Course by David Silver, Lecture 5: Model Free Control (Till 38:46)](https://www.youtube.com/watch?v=lfHX2hHRMVQ&t)
 2. [Coding Style Guide](https://github.com/gutfeeling/practical_rl_for_coders/blob/master/style_guide.md)
