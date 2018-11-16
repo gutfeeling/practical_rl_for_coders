@@ -11,7 +11,7 @@ follow directly from the goals stated below.
 2. Reproducibility is a big issue in RL. =>
 *Results should be perfectly reproducible.*
 
-3. Guido said code is more often read than written. =>
+3. Code is more often read than written. =>
 *Code should be easy to read and understand.*
 
 3. Deep RL is a relatively new field, and there's a lot of experimentation yet
