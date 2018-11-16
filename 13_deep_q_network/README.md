@@ -3,10 +3,11 @@
 At the end of this module
 
 1. You will able to list the main achievements in the Atari DQN papers (both NIPS and Nature versions) by DeepMind
-2. You will write environment wrappers in `OpenAI Gym` to reproduce the preprocessing in the NIPS paper
-3. You will write a `Keras` model to reproduce the CNN used by the NIPS paper
-4. You will be able to explain why replay memory and target networks lead to more stable learning 
-5. You will implement the breakthough DQN algoithm (NIPS version) to solve the `PongNoFrameSkip-v4` environment :tada:
+2. You will be able to select the correct Atari environments in `OpenAI Gym` to reproduce Deepmind results
+3. You will write environment wrappers in `OpenAI Gym` to reproduce the preprocessing in the NIPS paper
+4. You will write a `Keras` model to reproduce the CNN used by the NIPS paper
+5. You will be able to explain why replay memory and target networks lead to more stable learning when using Deep Networks
+6. You will implement the breakthough DQN algoithm (NIPS version) to solve the `PongNoFrameSkip-v4` environment :tada:
 
 ## Plan 
 
