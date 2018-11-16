@@ -5,7 +5,7 @@ At the end of this module
 1. You will be able to explain the concept of Agent, Environment, Action and Rewards. These are the basic
 building blocks of RL
 2. You will be able to install `OpenAI Gym`, instantiate environments, and control agents using Python
-3. You will be able to explain the output returned the `env.step(action)` method of `OpenAI Gym`
+3. You will be able to explain the output returned by the `env.step(action)` method of `OpenAI Gym`
 4. You will be able to define the learning goal of the agent in terms of maximizing the discounted reward sum
 5. You will be able to able to modify `OpenAI Gym` environments, run simple training and testing loops, and 
 log/monitor the agent's action
