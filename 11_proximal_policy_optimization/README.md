@@ -4,7 +4,7 @@ At the end of this module
 
 1. You will able to list the limitations of Vanilla Policy Gradient methods
 2. You will be able to explain why Proximal Policy Optimization with GAE leads to better learning stability and sample efficiency
-3. You will implement a Proximal Policy Optimization algorithm with Generalized Advantage Estimation (GAE) to solve 
+3. You will implement the state-of-the-art Proximal Policy Optimization algorithm with Generalized Advantage Estimation (GAE) to solve 
 the `BipedalWalker-v2` environment :tada:
 4. You will implement a custom `Keras` loss function
 
