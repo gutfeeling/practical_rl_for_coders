@@ -9,7 +9,7 @@ At the end of this module:
 5. You will implement a simple Policy Gradient algorithm (called REINFORCE) that iterates a Softmax policy to solve the 
 `LunarLander-v2` environment :tada:
 6. You will be able to list limitations of REINFORCE and describe how Actor Critic architectures address these limitations
-7. You will implement an Actor Critic architechture to solve the `LunarLander-v2` environment again :tada:
+7. You will implement an Actor Critic architecture to solve the `LunarLander-v2` environment again :tada:
 
 ## Plan
 
