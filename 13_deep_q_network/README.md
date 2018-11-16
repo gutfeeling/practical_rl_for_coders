@@ -7,7 +7,7 @@ At the end of this module
 3. You will write environment wrappers in `OpenAI Gym` to reproduce the preprocessing in the NIPS paper
 4. You will write a `Keras` model to reproduce the CNN used by the NIPS paper
 5. You will be able to explain why replay memory and target networks lead to more stable learning when using Deep Networks
-6. You will implement the breakthough DQN algoithm (NIPS version) in full detail and deploy in on `Google Cloud` to solve the `PongNoFrameSkip-v4` environment :tada:
+6. You will implement the breakthough DQN algoithm (NIPS version) in full detail and deploy it on `Google Cloud` to solve the `PongNoFrameSkip-v4` environment :tada:
 7. You will be able to implement the Nature version of the DQN algorithm and DQN variants like Double Q Learning and Dueling DQN to solve practically any Atari environment in `OpenAI Gym`
 
 ## Plan 
