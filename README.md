@@ -2,14 +2,13 @@
 
 1. You will learn all the theory necessary for reasoning about Reinforcement Learning problems. You will be able to choose the right algorithm, tune performance, and debug like a pro. But I will not go into mathematical proofs and instead, point you to appropriate references, in case you fancy such things. The goal is to turn you into a Reinforcement Learning engineer as fast as possible and with no-fluff-and-nonsense.
 
-2. My focus is teaching you to apply Reinforcement Learning in real world problems. Whenever we learn a new concept, we will code it up using `Python`, `OpenAI Gym` and `Keras`, so that you become familiar with all the practical implementation details. And believe me, nobody talks about these practical details! When I was implementing Reinforcement Learning algorithms for the first time, I searched for practical details everywhere, but eventually had to learn it by making mistake after mistake after mistake.
-You don't have to.
+2. My focus is teaching you to apply Reinforcement Learning in real world problems. Whenever we learn a new concept, we will code it up using `Python`, `OpenAI Gym` and `Keras`, so that you become familiar with all the practical implementation details. And believe me, nobody talks about these practical details! When I was implementing Reinforcement Learning algorithms for the first time, I searched and asked for practical details everywhere, but eventually had to learn it by making mistake after mistake after mistake.You don't have to.
 
 3. You will learn best practices in Reinforcement Learning that will make everything seem easier. I have picked up 
-these best practices by implementation tens of different RL algorithms on my own and find that they substantially
+these best practices by implementating tens of different RL algorithms on my own and find that they substantially
 reduce implementation time and bugs.
 
-4. You will implement state-of-the-art algorithms in Reinforcement Learning such as PPO and DQN. You will also develop the knowledge to understand and implement new research breakthroughs in this field. This is critical as this field is moving rapidly, and I can't teach you about future breakthroughs, even though I will update the course with new information regularly. But more 
+4. You will implement state-of-the-art algorithms in Reinforcement Learning such as PPO and DQN. You will also develop the knowledge to understand and implement new research breakthroughs in this field. This is critical as this field is moving rapidly, and I can't teach you everything, even though I will update the course with new information regularly. But more 
 importantly , if I can arm you with the tools to take on any Reinforcement Learning problem that you may face in your studies, career or projects on your own, then I think that is the best learning outcome.
 
 Check out the course plan below. It's filled with informative videos and exercises. For each exercise, there's a coding 
