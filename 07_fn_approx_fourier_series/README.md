@@ -24,3 +24,10 @@ learning rate per feature and write a method that returns the Q value by using l
 1. [Reinforcement Learning: An Introduction, Second Edition, Section 9.5.2](https://drive.google.com/file/d/1opPSz5AZ_kVa1uWOdOiveNiBFiEOHjkG/view)
 2. [Acrobot-v1 Environment Details](https://github.com/openai/gym/wiki/Leaderboard#acrobot-v1)
 
+## Navigation 
+
+[Next - Module 8: Neural Network crash course with `Keras`](https://github.com/gutfeeling/practical_rl_for_coders/tree/master/08_neural_network_crash_course_with_keras)
+
+[Previous - Module 6: Function approximation (Tile Coding)](https://github.com/gutfeeling/practical_rl_for_coders/tree/master/06_fn_approx_tile_coding)
+
+
