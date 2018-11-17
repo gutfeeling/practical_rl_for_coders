@@ -18,7 +18,13 @@ any state in the `CartPole-v0` environment, given a policy
 first place of decimal.*
 6. :pencil: **Exercise**: *Given a policy, find the values for a list of states.*
 
-# References
+## References
 
 1. [RL Course by David Silver, Lecture 2: Markov Decision Processes](https://www.youtube.com/watch?v=lfHX2hHRMVQ&t)
 2. [RL Course by David Silver, Lecture 3: Planning by Dynamic Programming](https://www.youtube.com/watch?v=lfHX2hHRMVQ&t)
+
+## Navigation
+
+[Next - Module 4: GLIE Monte Carlo](https://github.com/gutfeeling/practical_rl_for_coders/tree/master/04_glie_monte_carlo)
+
+[Previous - Module 2: RL basics with `Open AI` Gym](https://github.com/gutfeeling/practical_rl_for_coders/tree/master/02_rl_basics_with_openai_gym)
