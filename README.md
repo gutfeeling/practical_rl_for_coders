@@ -3,14 +3,15 @@
 1. You will learn all the theory necessary for reasoning about Reinforcement Learning problems, choosing the right algorithm, performance tuning, and debugging. But I will not go into mathematical proofs and instead, point you to appropriate references, in case you fancy such things. The goal is to turn you into a Reinforcement Learning engineer as fast as possible and with 
 no-fluff-and-nonsense.
 
-2. My focus is teaching you to apply Reinforcement Learning in real world problems. Whenever we learn a new concept, we will code it up using `Python`, `OpenAI Gym` and `Keras`, so that you become familiar with all the practical details that nobody ever talks about. And believe me, these practical details are extremely hard to find anywhere.
+2. My focus is teaching you to apply Reinforcement Learning in real world problems. Whenever we learn a new concept, we will code it up using `Python`, `OpenAI Gym` and `Keras`, so that you become familiar with all the practical details that nobody ever talks about. And believe me, these practical details are extremely hard to find anywhere. When I was implementing Reinforcement Learning algorithms for the first time, I searched for these practical details everywhere, but eventually had to learn it by making mistake after mistake after mistake.
 
 3. You will learn best practices in Reinforcement Learning that will make everything seem 10x easier. I have picked up 
-these best practices by implementation tens of different RL algorithms on my own. 
+these best practices by implementation tens of different RL algorithms on my own and can confirm that they substantially
+reduce implementation time and bugs.
 
 4. You will implement state-of-the-art algorithms in Reinforcement Learning such as PPO and DQN, and develop the knowledge to 
 read, understand and implement new research breakthroughs in this field. I want to make sure that you have the tools to take on 
-any Reinforcement Learning problem that you may face.
+any Reinforcement Learning problem that you may face in your studies, career or projects.
 
 ## Course Plan
 
