@@ -24,3 +24,8 @@ attention
 5. [OpenAI Blog Post on Proximal Policy Optimization](https://blog.openai.com/openai-baselines-ppo/)
 
 ### Reinforcement Learning in the Industry
+
+## Navigation
+
+[Next - Module 2: RL basics with `Open AI` Gym](https://github.com/gutfeeling/practical_rl_for_coders/tree/master/02_rl_basics_with_openai_gym)
+
