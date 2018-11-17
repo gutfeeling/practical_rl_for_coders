@@ -30,3 +30,11 @@ the agent twice and check if results are reproducible.*
 1. [RL Course by David Silver, Lecture 5: Model Free Control (Till 38:46)](https://www.youtube.com/watch?v=lfHX2hHRMVQ&t)
 2. [Coding Style Guide](https://github.com/gutfeeling/practical_rl_for_coders/blob/master/style_guide.md)
 3. [CartPole-v0 Environment Details](https://github.com/openai/gym/wiki/Leaderboard#cartpole-v0)
+
+## Navigation 
+
+[Next - Module 5: SARSA](https://github.com/gutfeeling/practical_rl_for_coders/tree/master/05_sarsa)
+
+[Previous - Module 3: Bellman Equations](https://github.com/gutfeeling/practical_rl_for_coders/tree/master/03_bellman_equations)
+
+
