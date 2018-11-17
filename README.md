@@ -1,6 +1,4 @@
-#  Practical Reinforcement Learning 
-
-An unique Reinforcement Learning course. It's unique because
+#  Practical Reinforcement Learning - An online course
 
 1. You will learn all the theory necessary for reasoning about Reinforcement Learning problems, choosing the right algorithm, performance tuning, and debugging. But I will not go into mathematical proofs and instead, point you to appropriate references, in case you fancy such things. The goal is to turn you into a Reinforcement Learning engineer as fast as possible and with 
 no-fluff-and-nonsense.
