@@ -24,3 +24,9 @@ Which one is better?*
 ## References
 
 1. [RL Course by David Silver, Lecture 5: Model Free Control (From 38:46)](https://www.youtube.com/watch?v=lfHX2hHRMVQ&t)
+
+## Navigation
+
+[Next - Module 6: Function approximation (Tile Coding)](https://github.com/gutfeeling/practical_rl_for_coders/tree/master/06_fn_approx_tile_coding)
+
+[Previous - Module 4: GLIE Monte Carlo](https://github.com/gutfeeling/practical_rl_for_coders/tree/master/04_glie_monte_carlo)
