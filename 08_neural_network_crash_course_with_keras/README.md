@@ -34,3 +34,9 @@ use different types of loss functions and optimizers, and even write your own cu
 1. [Deep Learning Crash Course by Sasank Chilamkurthy, Part 1 and 2](https://chsasank.github.io/deep-learning-crash-course-1.html)
 2. [Keras Documentation](https://keras.io/)
 3. [Example implementation of a custom loss function (Look at `proximal_policy_optimization_loss`)](https://github.com/OctThe16th/PPO-Keras/blob/master/Main.py)
+
+## Navigation
+
+[Next - Module 9: Function approximation (Neural Network)](https://github.com/gutfeeling/practical_rl_for_coders/tree/master/09_fn_approx_neural_network)
+
+[Previous - Module 7: Function approximation (Fourier Series)](https://github.com/gutfeeling/practical_rl_for_coders/tree/master/07_fn_approx_fourier_series)
