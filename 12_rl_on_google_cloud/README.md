@@ -22,3 +22,10 @@ execution in non reproducible mode and reproducible mode.*
 3. [Tensorflow GPU support](https://www.tensorflow.org/install/gpu)
 4. [Handle different versions of BLAS and LAPACK](https://wiki.debian.org/DebianScience/LinearAlgebraLibraries)
 
+## Navigation 
+
+[Next - Module 13: Deep Q Network](https://github.com/gutfeeling/practical_rl_for_coders/tree/master/13_deep_q_network)
+
+[Previous - Module 11: Proximal Policy Approximation](https://github.com/gutfeeling/practical_rl_for_coders/tree/master/11_proximal_policy_optimization)
+
+
