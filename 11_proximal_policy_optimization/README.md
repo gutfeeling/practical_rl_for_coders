@@ -23,3 +23,10 @@ the `BipedalWalker-v2` environment :tada:
 
 1. [Deep RL Bootcamp, Lecture 5: Natural Policy Gradients, TRPO, and PPO by John Schulman](https://www.youtube.com/watch?v=xvRrgxcpaHY)
 2. [BipedalWalker-v2 environment details](https://github.com/openai/gym/wiki/Leaderboard#bipedalwalker-v2)
+
+## Navigation 
+
+[Next - Module 12: RL On `Google Cloud`](https://github.com/gutfeeling/practical_rl_for_coders/tree/master/12_rl_on_google_cloud)
+
+[Previous - Module 10: Vanilla Policy Gradient](https://github.com/gutfeeling/practical_rl_for_coders/tree/master/10_vanilla_policy_gradient)
+
