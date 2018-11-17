@@ -29,3 +29,10 @@ gets the features.*
 
 1. [RL Course by David Silver, Lecture 7: Policy Gradient](https://www.youtube.com/watch?v=KHZVXao4qXs)
 2. [LunarLander-v2 environment details](https://github.com/openai/gym/wiki/Leaderboard#lunarlander-v2)
+
+## Navigation 
+
+[Next - Module 11: Proximal Policy Approximation](https://github.com/gutfeeling/practical_rl_for_coders/tree/master/11_proximal_policy_optimization)
+
+[Previous - Module 9: Function approximation (Neural Network)](https://github.com/gutfeeling/practical_rl_for_coders/tree/master/09_fn_approx_neural_network)
+
