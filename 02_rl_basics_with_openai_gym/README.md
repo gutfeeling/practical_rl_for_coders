@@ -33,3 +33,10 @@ pole angle exceeds 15 degrees and 0 otherwise.*
 3. [Wrappers](https://github.com/openai/gym/blob/master/gym/wrappers/README.md)
 4. [Wrapper Example : The TimeLimit Class](https://github.com/openai/gym/blob/master/gym/wrappers/time_limit.py)
 5. [Gym Monitoring (Tip : Study the public methods of the Monitor class, and read all docstrings)](https://github.com/openai/gym/blob/master/gym/wrappers/monitor.py)
+
+## Navigation
+
+[Next - Module 3: Bellman Equations](https://github.com/gutfeeling/practical_rl_for_coders/tree/master/03_bellman_equations)
+
+[Previous - Module 1: RL Breakthroughs and Use Cases](https://github.com/gutfeeling/practical_rl_for_coders/tree/master/01_rl_breakthroughs_and_use_cases)
+
