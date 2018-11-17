@@ -36,4 +36,9 @@ reproducing Deepmind results, you would need `NoFrameSkip-v4`)](https://github.c
 7. [DQN NIPS Paper](https://arxiv.org/abs/1312.5602)
 8. [DQN Nature Paper](https://www.nature.com/articles/nature14236)
 
+## Navigation 
+
+[Previous - Module 12: RL On `Google Cloud`](https://github.com/gutfeeling/practical_rl_for_coders/tree/master/12_rl_on_google_cloud)
+
+
 
