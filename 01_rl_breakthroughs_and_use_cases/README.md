@@ -10,7 +10,7 @@ attention
 ## Plan 
 
 1. :movie_camera: Welcome to the course!
-2. :movie_camera: Reinforcement Learning breakthroughs
+2. :movie_camera: What is Reinforcement Learning and breakthroughs
 3. :movie_camera: Who is using RL in the industry and how?
 
 ## References
